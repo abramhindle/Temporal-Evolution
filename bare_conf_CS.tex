@@ -490,25 +490,26 @@ to an issue~\cite{ICSEsocio:meneely}.
 
 Open-source communities are amenable to social network analysis as
 they are
-open to user interactions and often lack imposed organizational
-structures seen within corporate organization~\cite{ACM:chris}.
+open to user interaction and participation, as well they often lack imposed organizational
+structures seen within corporate organizations~\cite{ACM:chris}.
 As open source projects often lack strict centralized control and
 requirements~\cite{AMCIS:Freeh}, developers can often choose their
 tasks~\cite{ACM:ashish}. 
 This suggests that the local structure of users and developers
-who express an interest in one part of the system can tend to self
+who express an interest in one part of the project tend to self
 organize and produce interesting collaboration structures (networks).
 
 
 %Bug repos
 Bug repositories are also amenable to social network analysis as bug
-repositories host discussions regarding issues and bugs relevant to
+repositories host and record discussions regarding issues and bugs relevant to
 the development and use of a software development
 project~\cite{ACM:ashish,OSD:yasu}. 
 Bug repositories are also very popular among open-source projects.
 Collaboration between users and developers is evident in the bug
-reported as both users and developers report bugs, and post comments
-on bug reports, thus forming networks of collaborations.
+reported as both users and developers form networks of collaboration
+by reporting bugs, and posting comments
+on bug reports.
 
 
 %In this paper, we studied the Android bug community. The Android development contains both the systems or the sdks and the apps; it covers varieties of technique topics, and at the same time, developers are not organized statically as the very standard commercial software. The Android development comprises participants from different vanders, for example, some are from Motorola, some are from HTC, or Samsung, etc, and thus it should be interesting and worthwhile to study the Android community and see how well it could relate to the development facts. 
@@ -516,8 +517,8 @@ on bug reports, thus forming networks of collaborations.
 % Bug participants
 In the case of Android bug repository, provided by 2012 MSR
 Mining Challenge~\cite{DATA:msr}, a reporter would report a bug, which
-might attract comments from bug commenters that discuss the reasons
-and possible resolution of the bug.
+might attract comments from bug commenters, who might discuss the
+reasons and possible resolution of the bug.
 The bug reporting community members are comprised of both bug
 reporters and bug commenters who are either Android developers or
 Android users.
@@ -527,7 +528,7 @@ obvious boundary between a user and a developer.
 We refer to these different participants as \emph{bug participants}.
 
 % Setup SNA
-In order to use SNA, we pose that each node of the network represents
+In order to apply SNA to the bug repository, we pose that each node of the network represents
 one bug participant and each edge represents the connection between
 two participants who have communicated on the same bug. 
 We will discuss the detailed characteristics of our network graphs in
@@ -556,11 +557,11 @@ interesting comment which attracts comments from other participants.
 % bug community based on the participants' activities and discussions.
 
 % But we use windows
-However, the previous work applied their SNA on the entire project
-lifetime such that only a single community network was constructed. 
+However, the previous work~\cite{ACM:ashish,MSR:christ} applied their
+SNA on the entire lifetime of a project, such that only a single community network was constructed. 
 Some of these collaborations might not be evident if one were to
-analyze a single network.
-That is certain structures might not be very important on the global scale.
+analyze a large single network.
+That is certain structures might not be very prevalent on the global scale.
 In order to peer into these local self organized structures using
 social network analysis, we felt a windowed approach would be
 best. 
@@ -571,14 +572,14 @@ This sliding window view of centrality allows us to see those
 developers and users who are constantly at the forefront of discuss or
 those who and ebb and flow between issues and tasks.
 We choose a period of 30 days as a window, and we slide the window one-day each time; we
-make the network analysis for each window~\cite{ICSMwindowed:hindle}. 
+apply produce a network graph and apply SNA metrics on each window.
 Moreover, by sliding one day, each pair of adjacent windows would have
 an overlap, which results in smoother trends, and more importantly,
 helps to maintain context. 
 Other benefits provided by time windowed analysis is that it could
 give a more accurate and nuanced view of the data as 
-locally central participants then would not be \textquotedblleft
-drowned out\textquotedblright. 
+locally central participants then would not be 
+``drowned out''.
 
 
 
@@ -691,7 +692,8 @@ noted on their edges}
 % need to take up 2 columns
 \subsection{Betweenness}
 
-The betweenness\footnote[2]{Introduction to centralities: http://en.wikipedia.org/wiki/Centrality} of a vertex is the number of geodesic paths in a graph that includes this vertex; the geodesic path is defined as the shortest path which has the minimum weight between two nodes. 
+The betweenness\footnote[2]{Centrality:
+  http://en.wikipedia.org/wiki/Centrality (March 2012)} of a vertex is the number of geodesic paths in a graph that includes this vertex; the geodesic path is defined as the shortest path which has the minimum weight between two nodes. 
 Defined by Freeman, the betweenness can be represented as:
 
 \begin{equation} 

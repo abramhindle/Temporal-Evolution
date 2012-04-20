@@ -456,41 +456,167 @@ mining software repository; social network analysis; sliding windows
 
 \label{introduction}
 % no \IEEEPARstart
-An important aspect of applying Social Network Analysis (SNA) to software development teams is studying the development communities, since the interaction in the communities records the activities of each participant and the communication among them \cite{ICSEsocio:meneely}. The activities are supposed to reflect the project development process or even the project structure.
+An important aspect of applying Social Network Analysis (SNA) to
+software development teams is studying the development communities,
+since the interaction in the communities records the activities of
+each participant and the communication among them
+\cite{ICSEsocio:meneely}. 
+The activities are supposed to reflect the project development process
+or even the project structure.
 
-On the other hand, although with good management of development process, it is still difficult to view the structure of the whole community. For example, for open source software, developers are usually composed of volunteers and do not form into structural organizations \cite{ACM:chris}. Open source projects usually do not have central control and plans \cite{AMCIS:Freeh}. Some tasks are chosen by developers rather than being assigned \cite{ACM:ashish}. 
-It is also true for some big and complicated projects, which cover huge varieties of technique issues. Developers of such projects would be organized into departments, but one single department could still be working on problems related with multiple technique areas. In this case, even with organization, people's activities are not necessarily in accordance with the departments they belong to.
-For this matter, if the SNA could reflect developers' activities and relations which we can trust to some extent, it would significantly help the open source project management. We would be able to find potential groups of developers who work on the same technical areas, so that we can assign tasks on technical-group level. Besides, with better sight about developers, we could easily look for experts when needed as well.
+
+On the other hand, although with good management of development
+process, it is still difficult to view the structure of the whole
+community. 
+For example, for open source software, developers are usually composed
+of volunteers and do not form into structural organizations
+\cite{ACM:chris}. 
+Open source projects usually do not have central control and plans
+\cite{AMCIS:Freeh}. 
+Some tasks are chosen by developers rather than being assigned
+\cite{ACM:ashish}. 
+It is also true for some big and complicated projects, which cover
+huge varieties of technique issues. 
+Developers of such projects would be organized into departments, but
+one single department could still be working on problems related with
+multiple technique areas. 
+In this case, even with organization, people's activities are not
+necessarily in accordance with the departments they belong to.
+For this matter, if the SNA could reflect developers' activities and
+relations which we can trust to some extent, it would significantly
+help the open source project management. 
+We would be able to find potential groups of developers who work on
+the same technical areas, so that we can assign tasks on
+technical-group level. 
+Besides, with better sight about developers, we could easily look for
+experts when needed as well.
+
 
 %In this paper, we studied the Android bug community. The Android development contains both the systems or the sdks and the apps; it covers varieties of technique topics, and at the same time, developers are not organized statically as the very standard commercial software. The Android development comprises participants from different vanders, for example, some are from Motorola, some are from HTC, or Samsung, etc, and thus it should be interesting and worthwhile to study the Android community and see how well it could relate to the development facts. 
 
-In the case of Android bug reporting repository provided by 2012 MSR Mining Challenge \cite{DATA:msr}, a reporter would report a bug, which might attract comments discussing the reasons, the solutions, the bug histories, etc. The bug reporting community members are comprised of both bug reporters and commenters who could be either Android developers or Android users who are often fans of Android. From the perspective of the bug repository, there is actually no obvious boundary between a user and a developer. All of them are participating in making contributions to the project, and they form the networks when acting as reporters and making comments on bugs. We call both of the groups bug participants in this paper.
+In the case of Android bug reporting repository provided by 2012 MSR
+Mining Challenge \cite{DATA:msr}, a reporter would report a bug, which
+might attract comments discussing the reasons, the solutions, the bug
+histories, etc. 
+The bug reporting community members are comprised of both bug
+reporters and commenters who could be either Android developers or
+Android users who are often fans of Android. 
+From the perspective of the bug repository, there is actually no
+obvious boundary between a user and a developer. 
+All of them are participating in making contributions to the project,
+and they form the networks when acting as reporters and making
+comments on bugs. 
+We call both of the groups bug participants in this paper.
 
-In order to use SNA, we pose that each node of the network represents one bug participant and each edge represents the connection between two participants who have communicated on the same bug. The edge weights indicate the amount that two persons communicate with each other. We will discuss the detailed characteristics of our network graphs in Section ~\ref{methodology}.
+In order to use SNA, we pose that each node of the network represents
+one bug participant and each edge represents the connection between
+two participants who have communicated on the same bug. 
+The edge weights indicate the amount that two persons communicate with
+each other. 
+We will discuss the detailed characteristics of our network graphs in
+Section ~\ref{methodology}.
 
-We use betweenness centrality to quantify the importance of a participant in the community \cite{ICSEsocio:la}. Further explanation about the betweenness centrality will be introduced in Section ~\ref{methodology}. The betweenness centrality could reveal two aspects of a participant in a community network: 1) the quantity of bug reports (which attract at least one comment) or comments they have made and 2) the importance of the content of their reports or comments. When people have high betweenness, they might have: 1) reported quantities of bugs with at least one comment on them, 2) made lots of comments, 3) reported a very critical bug, 4) or made a very interesting comment which attracts comments from other participants.
 
-Previous work which applied SNA to software development has been introduced such as mining email archives and mining defect tracking systems \cite{MSR:christ} \cite{ACM:ashish} \cite{OSD:yasu}. Similarly, we built our SNA on bug reporting repository, which includes both bug reports and comments, and looked into the Android bug community based on the participants' activities and discussions.
+We use betweenness centrality to quantify the importance of a
+participant in the community \cite{ICSEsocio:la}. 
+Further explanation about the betweenness centrality will be
+introduced in Section ~\ref{methodology}. 
+The betweenness centrality could reveal two aspects of a participant
+in a community network: 1) the quantity of bug reports (which attract
+at least one comment) or comments they have made and 2) the importance
+of the content of their reports or comments. 
+When people have high betweenness, they might have: 1) reported
+quantities of bugs with at least one comment on them, 2) made lots of
+comments, 3) reported a very critical bug, 4) or made a very
+interesting comment which attracts comments from other participants.
 
-However, the previous work applied their SNA on the entire project lifetime such that only a single community network was constructed. In this case, the results would only reflect a static view, but ignore the trends and changing patterns of the community structures and the participants' social characters. Thus, in this paper, we adopt the time windowed method so that we are able to analyze the changes along the time line. We choose a period of 30 days as a window, slid one-day each time; we make the network analysis for each window \cite{ICSMwindowed:hindle}. Moreover, by sliding one day, each pair of adjacent windows would have an overlap, which results in smoother trends, and more importantly, helps to maintain context. Other benefits provided by time windowed analysis is that it could give a more accurate and nuanced view of the data \cite{ICSEsocio:meneely} \cite{ICSMwindowed:hindle}. Locally central participants then would not be \textquotedblleft drowned out\textquotedblright. 
 
-Further, as mentioned above, when applying SNA to study the software community, we expect a match between the hypothesis we made from the mining results and the facts in real development process. To validate our hypothesis, we inspect the Android release history\footnote[1]{Android release history: http://developer.android.com/sdk/index.html} and the Android changes repository, both of which reflect the real development activities. We study the change records authored by bug participants (those who have submissions in the changes repository) to get the technique specialties and the type of tasks they were working on. The participants we selected are those who ever show high betweenness centrality or have characterized activity patterns along the time line. By inspecting the Android release history, we get the contents of each major or minor releases. More details about the validation would be explained in Section \ref{validation}. 
+Previous work which applied SNA to software development has been
+introduced such as mining email archives and mining defect tracking
+systems \cite{MSR:christ} \cite{ACM:ashish} \cite{OSD:yasu}. 
+Similarly, we built our SNA on bug reporting repository, which
+includes both bug reports and comments, and looked into the Android
+bug community based on the participants' activities and discussions.
 
-In summary, in this paper, we use SNA to study the activities of bug participants based on the Android bug reports and comments repository. We apply the sliding time window method to get smoother change trends along the time line. With these mining results, we seek to analyze bug participants' interactions, activity trends and patterns. We then demonstrate our analysis results via answering the following interesting questions from both local and global views.
+
+However, the previous work applied their SNA on the entire project
+lifetime such that only a single community network was constructed. 
+In this case, the results would only reflect a static view, but ignore
+the trends and changing patterns of the community structures and the
+participants' social characters. 
+Thus, in this paper, we adopt the time windowed method so that we are
+able to analyze the changes along the time line. 
+We choose a period of 30 days as a window, slid one-day each time; we
+make the network analysis for each window \cite{ICSMwindowed:hindle}. 
+Moreover, by sliding one day, each pair of adjacent windows would have
+an overlap, which results in smoother trends, and more importantly,
+helps to maintain context. 
+Other benefits provided by time windowed analysis is that it could
+give a more accurate and nuanced view of the data
+\cite{ICSEsocio:meneely} \cite{ICSMwindowed:hindle}. 
+Locally central participants then would not be \textquotedblleft
+drowned out\textquotedblright. 
+
+
+Further, as mentioned above, when applying SNA to study the software
+community, we expect a match between the hypothesis we made from the
+mining results and the facts in real development process. 
+To validate our hypothesis, we inspect the Android release
+history\footnote[1]{Android release history:
+  http://developer.android.com/sdk/index.html} and the Android changes
+repository, both of which reflect the real development activities.
+ We study the change records authored by bug participants (those who
+ have submissions in the changes repository) to get the technique
+ specialties and the type of tasks they were working on. 
+The participants we selected are those who ever show high betweenness
+centrality or have characterized activity patterns along the time
+line. 
+By inspecting the Android release history, we get the contents of each
+major or minor releases. 
+More details about the validation would be explained in Section
+\ref{validation}.
+ 
+
+In summary, in this paper, we use SNA to study the activities of bug
+participants based on the Android bug reports and comments
+repository. 
+We apply the sliding time window method to get smoother change trends
+along the time line. 
+With these mining results, we seek to analyze bug participants'
+interactions, activity trends and patterns. 
+We then demonstrate our analysis results via answering the following
+interesting questions from both local and global views.
+
 
 Globally:
 
 RQ1. How does the number of active bug participants change over time? Why?
 
-RQ2. How does the betweenness centrality of a participant change over time? What are the reasons if they have a certain activity pattern?
+RQ2. How does the betweenness centrality of a participant change over
+time? What are the reasons if they have a certain activity pattern?
+
 
 Locally:
 
-RQ3. Are there special time ranges that participants are more/less active or central than normal? Why?
+RQ3. Are there special time ranges that participants are more/less
+active or central than normal? Why?
 
-RQ4. What are the possible scenarios for a very sharp change of the participants' centrality?
 
-The rest of our paper is organized as follows. Section \ref{background} introduces basic concepts and techniques we used in this study. The specific steps and the methodology would be discussed in Section \ref{methodology}. Section \ref{results} describes the details of our mining results. The analysis of the results and its corresponding validation is provided in Section \ref{validation}. Section \ref{limitation} presents the limitations of our mining process and Section \ref{conclusion} summarizes the paper and discusses the future work.
+RQ4. What are the possible scenarios for a very sharp change of the
+participants' centrality?
+
+
+The rest of our paper is organized as follows. 
+Section \ref{background} introduces basic concepts and techniques we
+used in this study. 
+The specific steps and the methodology would be discussed in Section
+\ref{methodology}. 
+Section \ref{results} describes the details of our mining results. 
+The analysis of the results and its corresponding validation is
+provided in Section \ref{validation}. 
+Section \ref{limitation} presents the limitations of our mining
+process and Section \ref{conclusion} summarizes the paper and
+discusses the future work.
 
 %%%%%%%%%%%%%%4. What are the possible scenarios for the very sharp change in the participants' centrality?
 
@@ -499,7 +625,12 @@ The rest of our paper is organized as follows. Section \ref{background} introduc
 \begin{figure}[!t]
 \centerline{\includegraphics[width=2.6in,height = 3.8cm]{graph.png}
 \label{graph}}
-\caption{An example: bug 14038 is reported by timothyA, and there are five comments on this bug. When time window applied, comments are plotted into two windows, and the bug report of this example forms two networks with the weight noted on their edges}
+\caption{An example: bug 14038 is reported by timothyA, and there are
+  five comments on this bug. 
+When time window applied, comments are plotted into two windows, and
+the bug report of this example forms two networks with the weight
+noted on their edges}
+
 \end{figure}
 
 \section{Background}

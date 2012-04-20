@@ -470,57 +470,49 @@ This structure can be important as we can use it to elicit those
 participants with expertise about an issue based on their centrality~\cite{ICSEsocio:meneely}. 
 
 Open source communities are interesting primarily due to their
-openness and general lack of imposed organizational structure\cite{ACM:chris}.
-Open source projects usually do not have central control and plans
-\cite{AMCIS:Freeh}. 
-Some tasks are chosen by developers rather than being assigned
-\cite{ACM:ashish}. 
-It is also true for some big and complicated projects, which cover
-huge varieties of technique issues. 
-Developers of such projects would be organized into departments, but
-one single department could still be working on problems related with
-multiple technique areas. 
-In this case, even with organization, people's activities are not
-necessarily in accordance with the departments they belong to.
-For this matter, if the SNA could reflect developers' activities and
-relations which we can trust to some extent, it would significantly
-help the open source project management. 
-We would be able to find potential groups of developers who work on
-the same technical areas, so that we can assign tasks on
-technical-group level. 
-Besides, with better sight about developers, we could easily look for
-experts when needed as well.
-
+openness and general lack of imposed organizational structure~\cite{ACM:chris}.
+As open source projects often lack strict centralized control and
+requirements~\cite{AMCIS:Freeh}, developers can often choose their
+tasks~\cite{ACM:ashish}. 
+This suggests that the local structure of users and developers
+who express an interest in one part of the system can tend to self
+organize and produce interesting collaboration structures (networks), furthermore these
+structures might not be evident in a global analysis.
+So in order to peer into these local self organized structures using
+social network analysis, we felt a windowed approach would be
+best. 
+Windowing allows us to look at network during a slice of time
+and then relate our measures (betweenness centrality per author) to
+the next window and beyond. 
+This sliding window view of centrality allows us to see those
+developers and users who are constantly at the forefront of discuss or
+those who and ebb and flow between issues and tasks.
 
 %In this paper, we studied the Android bug community. The Android development contains both the systems or the sdks and the apps; it covers varieties of technique topics, and at the same time, developers are not organized statically as the very standard commercial software. The Android development comprises participants from different vanders, for example, some are from Motorola, some are from HTC, or Samsung, etc, and thus it should be interesting and worthwhile to study the Android community and see how well it could relate to the development facts. 
 
-In the case of Android bug reporting repository provided by 2012 MSR
-Mining Challenge \cite{DATA:msr}, a reporter would report a bug, which
-might attract comments discussing the reasons, the solutions, the bug
-histories, etc. 
+In the case of Android bug repository, provided by 2012 MSR
+Mining Challenge~\cite{DATA:msr}, a reporter would report a bug, which
+might attract comments from bug commenters that discuss the reasons
+and possible resolution of the bug.
 The bug reporting community members are comprised of both bug
-reporters and commenters who could be either Android developers or
-Android users who are often fans of Android. 
-From the perspective of the bug repository, there is actually no
-obvious boundary between a user and a developer. 
-All of them are participating in making contributions to the project,
-and they form the networks when acting as reporters and making
-comments on bugs. 
-We call both of the groups bug participants in this paper.
+reporters and bug commenters who are either Android developers or
+Android users.
+From the perspective of the bug repository, unlike the version control
+system, there is actually no
+obvious boundary between a user and a developer.
+We refer to these different participants as \emph{bug participants}.
 
 In order to use SNA, we pose that each node of the network represents
 one bug participant and each edge represents the connection between
 two participants who have communicated on the same bug. 
-The edge weights indicate the amount that two persons communicate with
-each other. 
 We will discuss the detailed characteristics of our network graphs in
 Section ~\ref{methodology}.
 
 
 We use betweenness centrality to quantify the importance of a
 participant in the community \cite{ICSEsocio:la}. 
-Further explanation about the betweenness centrality will be
-introduced in Section ~\ref{methodology}. 
+(betweenness centrality is better explained in 
+ Section ~\ref{methodology}).
 The betweenness centrality could reveal two aspects of a participant
 in a community network: 1) the quantity of bug reports (which attract
 at least one comment) or comments they have made and 2) the importance

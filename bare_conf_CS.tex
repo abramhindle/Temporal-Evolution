@@ -722,39 +722,115 @@ the other people in a network, the more important or central they are
 \cite{BOOK:han}.
 
 
-In our work, we normalize the betweenness centrality values with the number of node pairs to eliminate the effect of different sizes of the networks.
+In our work, we normalize the betweenness centrality values with the
+number of node pairs to eliminate the effect of different sizes of the
+networks.
 
-Compared with simply counting the total number of comments or total bug reports of a participant, betweenness acts better to reflect the interactions among people. For example, when a person reports lots of bugs but none of them attract any comment, it is very likely that their bug reports are not interesting or important. In this case, if we merely counted the number of their reports or comments, we would possibly increase their importance in the network artificially. Therefore, we choose to use betweenness centrality to eliminate this unfair counting \cite{ICSEsocio:la}.
+
+Compared with simply counting the total number of comments or total
+bug reports of a participant, betweenness acts better to reflect the
+interactions among people. For example, when a person reports lots of
+bugs but none of them attract any comment, it is very likely that
+their bug reports are not interesting or important. In this case, if
+we merely counted the number of their reports or comments, we would
+possibly increase their importance in the network
+artificially. Therefore, we choose to use betweenness centrality to
+eliminate this unfair counting \cite{ICSEsocio:la}.
+
 
 \subsection{Overlapping Time Windowing}
 
-Compared to the approaches in other papers which produce results on the entire time line chosen for the SNA, windowed analysis is to window the data by a period of time and perform the analysis within each window. With this approach, in addition to being able to overview the participants' relations in a social network, we can also study the changes or trends of their social activity \cite{ICSMwindowed:hindle}. 
+Compared to the approaches in other papers which produce results on
+the entire time line chosen for the SNA, windowed analysis is to
+window the data by a period of time and perform the analysis within
+each window. With this approach, in addition to being able to overview
+the participants' relations in a social network, we can also study the
+changes or trends of their social activity
+\cite{ICSMwindowed:hindle}. 
 
-Moreover, time windowing analysis could give a more accurate and nuanced view of the data \cite{ICSEsocio:meneely} \cite{ICSMwindowed:hindle}, as locally central participants would not be \textquotedblleft drowned out\textquotedblright. For instance, if a person participated in lots of bug reports and bug comments during one month from January 1st to January 30th, 2010, within this window, they would be one of the most central people with a high betweenness. However, if they never appeared except for that month. Globally they have low betweenness and would not be claimed as central, though in a local window they have played a vital role. 
 
-Another point is that, comments on the same bug might not be temporally relevant \cite{Springer:kidane} \cite{Procedia:ibaa} so that a global time analysis would not make much sense in this case.
+Moreover, time windowing analysis could give a more accurate and
+nuanced view of the data \cite{ICSEsocio:meneely}
+\cite{ICSMwindowed:hindle}, as locally central participants would not
+be \textquotedblleft drowned out\textquotedblright. For instance, if a
+person participated in lots of bug reports and bug comments during one
+month from January 1st to January 30th, 2010, within this window, they
+would be one of the most central people with a high
+betweenness. However, if they never appeared except for that
+month. Globally they have low betweenness and would not be claimed as
+central, though in a local window they have played a vital role. 
 
-Furthermore, in this paper, we slide the windows by one day and there is an overlap between two adjacent windows. For two adjacent windows $A$ and $B$, $B$ starts on the second day of $A$, and they would have an overlapping of 29 days. Normally, windows could be either overlapped or not. We choose to use the overlapping window because the overlapping would smooth the trends and maintain the context. If there is a very sharp drop on values of a certain participant, the overlapping windows would give an insider's view of the change and what was happening.
+
+Another point is that, comments on the same bug might not be
+temporally relevant \cite{Springer:kidane} \cite{Procedia:ibaa} so
+that a global time analysis would not make much sense in this case.
+
+
+Furthermore, in this paper, we slide the windows by one day and there
+is an overlap between two adjacent windows. For two adjacent windows
+$A$ and $B$, $B$ starts on the second day of $A$, and they would have
+an overlapping of 29 days. Normally, windows could be either
+overlapped or not. We choose to use the overlapping window because the
+overlapping would smooth the trends and maintain the context. If there
+is a very sharp drop on values of a certain participant, the
+overlapping windows would give an insider's view of the change and
+what was happening.
+
 
 \subsection{Clustering}
-In order to perceive clusters and interactions, we clustered the bug participants by their betweenness centrality distribution along the time line. K-means is one of the most popular clustering methods. We choose to use K-means with Cosine distance since from the experiments, data clustered by K-means with Cosine distance gives a better view than K-means with Euclidean distance. Cosine distance calculates the similarity between each pair of data and Euclidean distance focuses on the magnitude of data. The Cosine distance between two vectors could be defined as,
+In order to perceive clusters and interactions, we clustered the bug
+participants by their betweenness centrality distribution along the
+time line. K-means is one of the most popular clustering methods. We
+choose to use K-means with Cosine distance since from the experiments,
+data clustered by K-means with Cosine distance gives a better view
+than K-means with Euclidean distance. Cosine distance calculates the
+similarity between each pair of data and Euclidean distance focuses on
+the magnitude of data. The Cosine distance between two vectors could
+be defined as,
+
 
 \begin{equation}
 Cosine\_dist(A,B) = 1-\frac{A\cdot B}{\Arrowvert A \Arrowvert \Arrowvert B \Arrowvert}
 \end{equation}
 
-where A and B are two vectors, $\{\cdot\}$ represents the inner dot operation and $\Arrowvert \cdot \Arrowvert$ indicates the module of the vector. With clustering, data with similar properties would be grouped together so that bug participants with similar activity patterns would also be grouped together. 
+where A and B are two vectors, $\{\cdot\}$ represents the inner dot
+operation and $\Arrowvert \cdot \Arrowvert$ indicates the module of
+the vector. With clustering, data with similar properties would be
+grouped together so that bug participants with similar activity
+patterns would also be grouped together. 
+
 
 \section{Methodology}
-% why window 7 days? clusters.
-% take up 3 columns
 \label{methodology}
 \subsection{Data}
-With the provided Android bug repository and the Android changes repository from the MSR challenge, we converted the XML format data to a database for efficient analysis using Microsoft SQL Server Business Intelligence. Our analysis focuses on the bug records of the previous two years from January 1st 2010 to December 4th 2011 since people during these two years are more active than the other years and the activities are representative, as showed in Figure 2. The data we used covers 14,432 out of 20,169 total bug records and 46,806 out of 67,730 total bug comments. Related to these bug and comment records, there are 30,969 people who have either reported a bug or made comments on a bug.
 
-The bug and comment records are grouped into 30-day windows sliding by 1 day. The strategy of taking 30 days as a window and sliding by 1 day would be discussed in detail in Section \ref{methodology}. With this windowing strategy, we extracted 673 windows in total from the records of bug communities, despite of the data not provided after December 4th, 2011.
+With the provided Android bug repository and the Android changes
+repository from the MSR challenge, we converted the XML format data to
+a database for efficient analysis using Microsoft SQL Server Business
+Intelligence. Our analysis focuses on the bug records of the previous
+two years from January 1st 2010 to December 4th 2011 since people
+during these two years are more active than the other years and the
+activities are representative, as showed in Figure 2. The data we used
+covers 14,432 out of 20,169 total bug records and 46,806 out of 67,730
+total bug comments. Related to these bug and comment records, there
+are 30,969 people who have either reported a bug or made comments on a
+bug.
 
-In addition, we make use of the data from Android changes repository to validate the mining results. The \textquotedblleft project\textquotedblright \ and the \textquotedblleft target\textquotedblright \ schema record all the submitted files from the developers, from which the actual behaviours could be identified.
+
+The bug and comment records are grouped into 30-day windows sliding by
+1 day. The strategy of taking 30 days as a window and sliding by 1 day
+would be discussed in detail in Section \ref{methodology}. With this
+windowing strategy, we extracted 673 windows in total from the records
+of bug communities, despite of the data not provided after December
+4th, 2011.
+
+
+In addition, we make use of the data from Android changes repository
+to validate the mining results. The \textquotedblleft
+project\textquotedblright \ and the \textquotedblleft
+target\textquotedblright \ schema record all the submitted files from
+the developers, from which the actual behaviours could be identified.
+
 
 \begin{figure*}[ht]
 \centering

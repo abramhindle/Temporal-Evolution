@@ -690,11 +690,11 @@ noted on their edges}
 \label{background}
 % talk about window, overlap, cluster 
 % need to take up 2 columns
-\subsection{Betweenness}
+\subsection{Betweenness Centrality}
 
 % XXX Defined by Freeman? Link/Cite!
-The betweenness\footnote[2]{Centrality:
-  http://en.wikipedia.org/wiki/Centrality (March 2012)} centrality of
+The betweenness centrality~\footnote[2]{Centrality:
+  http://en.wikipedia.org/wiki/Centrality (March 2012)} of
 a vertex is the number of geodesic paths in a graph that includes this
 vertex;
 the geodesic path is defined as the shortest path which has the
@@ -740,7 +740,6 @@ eliminate this unfair counting~\cite{ICSEsocio:la}.
 
 \subsection{Overlapping Time Windowing}
 
-%XXX AUGH
 When SNA is applied in other
 papers~\cite{MSR:christ,ICSEsocio:meneely} it is typically applied to
 the entire history or one period of the partial history and all the
@@ -787,15 +786,23 @@ what was happening.
 
 
 \subsection{Clustering}
-In order to perceive clusters and interactions, we clustered the bug
-participants by their betweenness centrality distribution along the
-time line. K-means is one of the most popular clustering methods. We
-choose to use K-means with Cosine distance since from the experiments,
-data clustered by K-means with Cosine distance gives a better view
-than K-means with Euclidean distance. Cosine distance calculates the
-similarity between each pair of data and Euclidean distance focuses on
-the magnitude of data. The Cosine distance between two vectors could
-be defined as,
+
+In order to perceive clusters, that is local groups of interactions,
+we clustered the bug participants by their betweenness centrality
+distribution along the time line. 
+%XXX cite K-Means
+%XXX What is K?
+K-means is one of the most popular
+clustering methods. 
+We choose to use K-means with Cosine distance
+since from our own experiments, data clustered by K-means with Cosine
+distance gives a better view than K-means with Euclidean
+distance. 
+In this paper Cosine distance calculates the similarity between each pair
+author in terms of temporal centrality whereas Euclidean distance
+focuses on the magnitude of data, the size and frequency of centrality.
+The
+Cosine distance between two vectors could be defined as,
 
 
 \begin{equation}
@@ -804,7 +811,7 @@ Cosine\_dist(A,B) = 1-\frac{A\cdot B}{\Arrowvert A \Arrowvert \Arrowvert B \Arro
 
 where A and B are two vectors, $\{\cdot\}$ represents the inner dot
 operation and $\Arrowvert \cdot \Arrowvert$ indicates the module of
-the vector. With clustering, data with similar properties would be
+the vector. With clustering, authors with similar temporal centrality would be
 grouped together so that bug participants with similar activity
 patterns would also be grouped together. 
 

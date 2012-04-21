@@ -692,17 +692,35 @@ noted on their edges}
 % need to take up 2 columns
 \subsection{Betweenness}
 
+% XXX Defined by Freeman? Link/Cite!
 The betweenness\footnote[2]{Centrality:
-  http://en.wikipedia.org/wiki/Centrality (March 2012)} of a vertex is the number of geodesic paths in a graph that includes this vertex; the geodesic path is defined as the shortest path which has the minimum weight between two nodes. 
+  http://en.wikipedia.org/wiki/Centrality (March 2012)} centrality of
+a vertex is the number of geodesic paths in a graph that includes this
+vertex;
+the geodesic path is defined as the shortest path which has the
+minimum weight between two nodes. 
 Defined by Freeman, the betweenness can be represented as:
 
 \begin{equation} 
 \sum_{i=1}^{j-1}\sum_{j=1}^{n}\frac{g_{ij}(p_k)}{g_{ij}}, i\neq j \neq k
 \end{equation}
 
-where $p_k$ is a vertex of the graph, $n$ is the total number of vertices, $i$ and $j$ are vertices other than $p_k$, $g_{ij}$ is the number of geodesic paths between vertex $i$ and $j$, and $g_{ij}(p_k)$ is the number of geodesic paths that include $p_k$.
+where $p_k$ is a vertex of the graph, $n$ is the total number of
+vertices, $i$ and $j$ are vertices other than $p_k$, $g_{ij}$ is the
+number of geodesic paths between vertex $i$ and $j$, and $g_{ij}(p_k)$
+is the number of geodesic paths that include $p_k$.
 
-It is used as a measurement of a person's importance in a network. A person would be regarded as central if they are on the geodesic path between two other persons. As proposed by Freeman, if a person locates on the geodesic path between two other persons, they become the key person who connects the others. That is, the more a person connects to the other people in a network, the more important or central they are \cite{BOOK:han}.
+
+It is used as a measurement of a person's importance in a network. 
+A person would be regarded as central if they are on the geodesic path
+between two other persons. 
+As proposed by Freeman, if a person locates
+on the geodesic path between two other persons, they become the key
+person who connects the others. 
+That is, the more a person connects to
+the other people in a network, the more important or central they are
+\cite{BOOK:han}.
+
 
 In our work, we normalize the betweenness centrality values with the number of node pairs to eliminate the effect of different sizes of the networks.
 

@@ -714,12 +714,12 @@ is the number of geodesic paths that include $p_k$.
 It is used as a measurement of a person's importance in a network. 
 A person would be regarded as central if they are on the geodesic path
 between two other persons. 
-As proposed by Freeman, if a person locates
+As proposed by Freeman, if a person is located
 on the geodesic path between two other persons, they become the key
 person who connects the others. 
 That is, the more a person connects to
-the other people in a network, the more important or central they are
-\cite{BOOK:han}.
+the other people in a network, the more important or central they 
+are~\cite{BOOK:han}.
 
 
 In our work, we normalize the betweenness centrality values with the
@@ -735,13 +735,25 @@ their bug reports are not interesting or important. In this case, if
 we merely counted the number of their reports or comments, we would
 possibly increase their importance in the network
 artificially. Therefore, we choose to use betweenness centrality to
-eliminate this unfair counting \cite{ICSEsocio:la}.
+eliminate this unfair counting~\cite{ICSEsocio:la}.
 
 
 \subsection{Overlapping Time Windowing}
 
-Compared to the approaches in other papers which produce results on
-the entire time line chosen for the SNA, windowed analysis is to
+%XXX AUGH
+When SNA is applied in other papers it is typically applied to the entire
+history or one period of the partial history and all the bug reports
+within that period.
+Windowed analysis instead captures mulitple overlapping periods into
+windows (usually sliding across the timeline by a constant time step)
+other papers that aggregate the 
+the entire history of bug reports into one graph for SNA, windowed analysis
+limits the bug reports to those that fit within a short time period.
+Furthermore, the limitations of this short term analysis are
+addressed, by shifting the window start a constant amount of time and then
+analyzing that period 
+
+amount of time to a short period. Furthermore windowed anal
 window the data by a period of time and perform the analysis within
 each window. With this approach, in addition to being able to overview
 the participants' relations in a social network, we can also study the

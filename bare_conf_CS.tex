@@ -866,7 +866,7 @@ explained as following:
 
 
 \textbf{Step 1: Pruning the data.} We pruned the records of the
-reporters and commenters into pure name format, which are originally
+reporters and commenters into a pure name format, which are originally
 recorded in semi-anonymous email formats in the XML repository dump. 
 For example, given the original email address which is represented by
 \textquotedblleft mathias....@gmail.com\textquotedblright, we truncate
@@ -882,96 +882,95 @@ common names or email addresses starting at just a simple letter like
 
 
 \textbf{Step 2: Windowing the records.} We windowed the data into
-periods of 30 days with a 29-day overlap. The reason for taking 30
-days as a window is that from the extracted data, 30 days is a
-reasonable time period which contains enough changing information and
-at the same time excludes too much detail. In addition, sliding the
-next window by 1 day from the current one could result in smoother
-trends. We have compared it with our previous result from sliding by 7
-days, the participants' arising and vanishing in the bug community
-could be described more gradually and smoothly by sliding only 1
-day. Therefore, we choose to slide windows by 1 day to get better
-analysis results.
+periods of 30 days with a 29-day overlap. 
+30 days was chosen as a window size because it is smaller than the
+periods between a major and minor release, it is similar to a month of
+work, but long enough to contain the resolution of multiple bugs.
+We have compared sliding by 1 day with our previous result of sliding by 7
+days, 1 day sliding produces gradual and smoother transitions of
+centrality.
 
 
 \textbf{Step 3: Establishing the network.} We made a SNA sliding
-window tool with Java and the JUNG Graph Framework, which read bug and
-comment records from the database and established social networks.
+window tool with Java and the JUNG Graph Framework, that converted bug
+reports and bug comment records within a window to a social network graph.
 
-
-The nodes of the network represent participants who have either
+The nodes of these networks represent participants who have either
 reported some bugs or made comments on bugs. The edges represent
-connections between two nodes. Besides, all the edges are
-weighted. For a certain bug within a selected time window, whenever a
-person makes a comment on this bug, the edge between the bug commenter
-and the bug reporter would get weight plus one, as well as the edges
+connections between two nodes. All the edges are weighted.  
+For a bug within a selected time window, whenever a person
+makes a comment on this bug, the edge between the bug commenter and
+the bug reporter would get weight plus one, as well as the edges
 linking to the participants who previously make comments on this
 bug. Bug reports or comments in different windows would have separate
-network graph for their reporters or commenters. An example in Figure
-1 indicates how the weighted network graph is built.
+network graphs depending on the activity of their reporters or
+commenters. An example in Figure 1 indicates how the weighted network
+graph is built.
 
 
 \textbf{Step 4: Calculating the centrality.} We calculated the
 betweenness centrality with JUNG, and normalized the centrality by
-dividing (n-1)(n-2)/2, which is the number of node pairs excluding the
-current node. We then get a list of all the bug participants and their
-betweenness centrality values for the total 673 overlapping windows.
+dividing by the number of node pairs excluding the current node
+($(n-1)(n-2)/2$). We then get a list of all the bug participants and
+their betweenness centrality values for the total 673 overlapping
+windows.
 
 
 \textbf{Step 5: Extracting the participants.} We removed the
 participants with betweenness centrality value 0, who might have
 either reported a bug/bugs with no comments, or made the only comment
-of a bug so that no other participants are related. Afterwards, we get
+of on a bug so that no other participants are related. Afterwards, we get
 1654 participants in total out of the 30969.
 
 
-\textbf{Step 6: Generating the analysis graph.} So far, the activity
-of each bug participant is represented by a 673 dimensions vector with
-each element indicating the betweenness centrality value during the
+\textbf{Step 6: Generating the analysis graph.} The activity
+of each bug participant is represented by a 673 dimensional vector with
+each element indicating the betweenness centrality value extracted
+from the graph generated from the window for that
 specific time period (in our case, the specific time period is 30 days
 starting from the date of the window start point). Then we clustered
-all the vectors by using K-means with Cosine distance to 100
+all the vectors by using K-means ($K=100$) with Cosine distance to 100
 clusters. The reason for clustering into 100 clusters is that from
-experiments, we get the best visualized view of all the data with 100
+experiments, we get the aesthetically best visualization (our
+subjective opinion based on visible clusters) of all the data with 100
 clusters. Finally, we plotted the results, as shown in Figure 3 to
-better visualize the clustered data so that we could easily analyze
+visualize the clustered data so that we could easily analyze
 our results.
 
 
 \textbf{Step 7: Validating with the Android release history and change
   repository.} In addition to the methodology of mining the Android
-bug repository, we made use of the Android changes repository and
-inspected the release history to validate our analytical hypothesis
-from the result. In order to find out how the community participants
+bug repository, we made use of the Android version control system
+(git) and
+inspected the release history to validate the purpose behind the
+clusters we observed.
+In order to find out how the community participants
 act in accordance with the project development and why some
 participants are more likely to be clustered into the same group, we
-looked into their change submissions to find their specialties.
+looked into their commit history to find their specialties.
 
 
-The types of files submitted and corresponding projects are highly
-correlated with the techniques acquired by people who write them. For
-instance, if some participant always submits kernel related code
+The types of files modified and the corresponding projects are highly
+correlated with the skills of those who commit changes. For
+instance, if a developer always submits kernel related code
 files, they are more likely to be specialized in kernel techniques. We
-extracted the submissions related to the participants from the changes
-repository. We manually identified the participants specialties by
-observing the \textquotedblleft project \textquotedblright \ and the
-\textquotedblleft target \textquotedblright \ schema in all the
-submissions of this person to know about what specific source files or
-documentations were submitted or what project they were working on at
-that time. To give a specific example, the submissions of a person
-Josh Guilfoyle have targets on the file
+extracted the submissions related to the developer from the version
+control system.
+We manually identified the participants specialties by
+observing the ``project'' and the
+``target'' for all of their commits (such as source code or
+documentation).
+To give a specific example, if there were commits from a developer,
+Mr. Guilfoyle, on the file
 media/java/android/media/Ringtone.java under the project
-platform\_frameworks\_base; then, we would identify that this Josh is
-specialized in something about the platform ringtone. 
-Therefore, we are able to know participants' specialties.
+platform\_frameworks\_base; then, we would suggest that Mr. Guilfoyle 
+likely has some specialized knowledge about the platform's ringtone. 
+Thus this is how we derive participant expertise.
 
-
-
-
-Also, we could further relate their specialties to their centrality
+Also, we could further relate their expertise to their centrality
 patterns. The Android release history could, on the other hand, help
-to relate the release highlights to participants being central during
-that release time. Detailed information would be presented in Section
+to relate the release highlights to participants central behaviour during
+that release. Further validation is discussed in Section
 \ref{validation}. 
 
 

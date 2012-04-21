@@ -741,51 +741,48 @@ eliminate this unfair counting~\cite{ICSEsocio:la}.
 \subsection{Overlapping Time Windowing}
 
 %XXX AUGH
-When SNA is applied in other papers it is typically applied to the entire
-history or one period of the partial history and all the bug reports
-within that period.
-Windowed analysis instead captures mulitple overlapping periods into
-windows (usually sliding across the timeline by a constant time step)
-other papers that aggregate the 
-the entire history of bug reports into one graph for SNA, windowed analysis
-limits the bug reports to those that fit within a short time period.
-Furthermore, the limitations of this short term analysis are
-addressed, by shifting the window start a constant amount of time and then
-analyzing that period 
-
-amount of time to a short period. Furthermore windowed anal
-window the data by a period of time and perform the analysis within
-each window. With this approach, in addition to being able to overview
-the participants' relations in a social network, we can also study the
-changes or trends of their social activity
-\cite{ICSMwindowed:hindle}. 
-
+When SNA is applied in other
+papers~\cite{MSR:christ,ICSEsocio:meneely} it is typically applied to
+the entire history or one period of the partial history and all the
+bug reports within that period.
+Windowed analysis instead repeats social network analysis across 100s
+of windows (in our case, as many windows as we have days). These
+windows overlap and often the analysis of one window results in the
+same analysis as the previous window due to overlap. We slid our
+windows by 1 day, so our overlap is 29 days, that is each window does
+some redundant analysis but this leads to smoother transitions in
+analysis between windows. Thus 1 comment in a bug report will have an
+effect on the graphs of 30 windows. This is similar to Hindle et
+al.'s\cite{ICSMwindowed:hindle} analysis of topics using windows but
+they did not use an overlap.
 
 Moreover, time windowing analysis could give a more accurate and
 nuanced view of the data \cite{ICSEsocio:meneely}
 \cite{ICSMwindowed:hindle}, as locally central participants would not
-be \textquotedblleft drowned out\textquotedblright. For instance, if a
-person participated in lots of bug reports and bug comments during one
+be ``drowned out''. For instance, if a
+bug participant participated in many bug reports and bug comments during one
 month from January 1st to January 30th, 2010, within this window, they
 would be one of the most central people with a high
 betweenness. However, if they never appeared except for that
-month. Globally they have low betweenness and would not be claimed as
-central, though in a local window they have played a vital role. 
+month, globally, they would have low betweenness and would not show up
+as central
+central, though during a shorter period they have played a vital role. 
 
 
-Another point is that, comments on the same bug might not be
-temporally relevant \cite{Springer:kidane} \cite{Procedia:ibaa} so
-that a global time analysis would not make much sense in this case.
+Another point is that, comments on the same bug might not be globally
+temporally relevant~\cite{Springer:kidane,Procedia:ibaa} thus 
+ a global time analysis would not make much sense in this case. This
+ could happen if new changes induce new bugs or change the behaviour
+ of a reported bug.
 
-
-Furthermore, in this paper, we slide the windows by one day and there
+In this paper, we slide the windows by one day and there
 is an overlap between two adjacent windows. For two adjacent windows
 $A$ and $B$, $B$ starts on the second day of $A$, and they would have
-an overlapping of 29 days. Normally, windows could be either
+an overlap of 29 days. Normally, windows could be either
 overlapped or not. We choose to use the overlapping window because the
-overlapping would smooth the trends and maintain the context. If there
+overlapping smooths trends and maintains context. If there
 is a very sharp drop on values of a certain participant, the
-overlapping windows would give an insider's view of the change and
+overlapping windows would give a more nuanced view of the change and
 what was happening.
 
 

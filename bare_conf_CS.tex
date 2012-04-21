@@ -1049,42 +1049,60 @@ developers would like to discuss the bugs.
 
 Observing the continuity of betweenness centrality in Figure 3, some
 participants have kept active during the entire two years, and
-correspondingly they have a very continuous highlighted line. For
-participants of this type, there are possible explanations. 
+correspondingly they have a very continuous and bright line. For
+participants of this type, there are a few possible explanations. 
 
-
+% XXX IN THE PRESENTATION YOU NAMED NAMES. STOP GUESSING. TELL US IF
+% THIS IS THE CASE
 First, we suspect these participants are professional developers who
 belong to the core development team so that what they reported are
 more important issues which attract more participants to discuss and fix
 them. 
+% XXX VERIFY THIS SENTENCE IS IT TRUE OR NOT?
+When investigating some of the continuous lines we found some
+participants were Google employees.
 
-
-Second, they are probably of high community status or expertises who
-supervise and guide the development and improvement of the
-project. They would like to report big issues and will give expertized
-comments on bugs. 
+% XXX YOU SAID THIS IN THE PRESENTATION AND HAD EXAMPLES DID YOU LOOK
+% AT THIS OR NOT
+Second, some of these participants are of high community status or
+expertise, and they might
+supervise and guide the development of the 
+project. 
+%They would like to report big issues and will give expert
+%comments on bugs. 
+% XXX PLEASE GIVE AN EXAMPLE WHERE DID THE VALIDATION GO
 
 
 However, in most cases, participants' betweenness values are
-distributed dispersedly, as observed in Figure 3. We counted the
-number of occurrences of the continuous betweenness values which are
-greater than 0. It means that we would count 1 if the betweenness
-value is greater than 0 for the first time and take the next values
-together as the first continuous occurrence until we meet 0. Then the
-second time we meet value greater than 0, we would count 2 and take
-the next values together as the second continuous occurrence until
-another 0 occurs. Except participants who keep active all the time,
-those with count number 1 would be considered as participants who only
-appear once. We suspect them to be users. Participants with count
-number greater than 1 would be phasers who periodically occur in bug
-community. These randomly phasing participants are very likely to
+highly variant, as observed in Figure 3. 
+To investigate the variation in betweenness values over time we
+decided to count the number of times that a user experienced one or more
+consecutive windows of betweenness, that is a range of windows in
+which the user had non-zero betweenness.
+% We counted the
+% number of occurrences of the continuous betweenness values which are
+% greater than 0. 
+% It means that we would count 1 if the betweenness
+% value is greater than 0 for the first time and take the next values
+% together as the first continuous occurrence until we meet 0. 
+% Then the
+% second time we meet value greater than 0, we would count 2 and take
+% the next values together as the second continuous occurrence until
+% another 0 occurs. 
+Participants who had less than a few windows of betweeness only had 1
+distinct range of betweenness are considered to be participants who
+only appeared once, and are probably users (validated in Section \ref{validation}). 
+Participants with a count of distinct ranges
+ greater than 1 would be phasers who periodically participate within
+ the Android bug
+community. 
+These randomly phasing participants (\emph{phasers}) are very likely to
 acquire less knowledge or have lower community status in their
-community, compared to those with continuous high centrality. They
+community, than those with continuous high centrality. 
+Phasers
 might be interested in limited topics and only central and active
 during the appearance of bugs relevant to those topics.
-
-
-These possibilities would be validated in Section \ref{validation}.
+We validate the roles these participants play in Section \ref{validation}.
 
 \subsection{Local Comparison}
 \label{local}

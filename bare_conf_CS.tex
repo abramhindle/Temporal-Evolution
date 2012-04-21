@@ -606,7 +606,7 @@ locally central participants then would not be
 % repository.
 % % both of which reflect the real development activities.
 % % We study the change records authored by bug participants (those who
-% % have submissions in the changes repository) to get the technique
+% % have submissions in the version control system) to get the technique
 % % specialties and the type of tasks they were working on. 
 % %The participants we selected are those who ever show high betweenness
 % %centrality or have characterized activity patterns along the time
@@ -621,8 +621,8 @@ highlights relevant behaviour.
 To help validate if this method highlights existing relevant behaviour 
 we inspected the Android release
 history\footnote[1]{Android release history:
-  http://developer.android.com/sdk/index.html} and the Android changes
-repository.
+  http://developer.android.com/sdk/index.html} and the Android version
+control system.
 More details about the validation would be explained in Section
 \ref{validation}.
  
@@ -822,8 +822,9 @@ K-means, where $K =
 \label{methodology}
 \subsection{Data}
 
-With the provided Android bug repository and the Android changes
-repository from the MSR Challenge~\cite{DATA:msr}, we converted the XML format data to
+With the provided Android bug repository and the Android version
+control system
+from the MSR Challenge~\cite{DATA:msr}, we converted the XML format data to
 a database for efficient analysis using Microsoft SQL Server Business
 Intelligence. Our analysis focused on the bug records of the previous
 two years from January 1st 2010 to December 4th 2011 since participants
@@ -1110,26 +1111,22 @@ We validate the roles these participants play in Section \ref{validation}.
 \textbf{RQ3. Are there special time ranges that participants are more/less active or central than normal? Why?}
 
 By manually inspecting Android version history, we found that the v2.1
-SDK was released on 12 Jan. 2010, which corresponds to the first peak
-value in Figure 5. v2.2 SDK was released on 20 May 2010 and this
+SDK was released on 12 January 2010, which corresponds to the first peak
+value in Figure 5. Android v2.2 SDK was released on 20 May 2010 and this
 corresponds to peak 2. From Dec. 2010 to the beginning of Mar. 2011,
 several minor updates were released and on 22 Feb. 2011, one major
 update v3.0 SDK was released. These releases explain the summit, i.e.,
-peak 3, in the figure. That is, there would be more participants
-discussing and fixing bugs around either major or minor releases,
-which also indicates that the whole social network is more active
-around these periods.
+peak 3, in  Figure 5. This is correlated with more participation at
+the same time.
 
-
-In addition, for the first obvious  \textquotedblleft
-gap\textquotedblright, which covers the time from Oct. 2010 to the end
-of 2010 (around window 300), there were fewer releases. Social network
-during this time period is less active and even \textquotedblleft
-quiet\textquotedblright.
+In addition, for the first obvious ``gap'', which covers the time from
+October 2010 to the end of 2010 (around window 300), there were fewer
+releases. The social network during this time period is almost inactive
+and even ``quiet''.
 
 
 The other bottom value showing up in the end of Figure 5 results from
-the fact that there are no bug reports recorded in the given dataset
+the fact that there are no bug reports recorded (right tail censoring) in the given dataset
 and the betweenness value is simply calculated by the comments
 belonging to bug reports several weeks or months before. 
 
@@ -1150,43 +1147,50 @@ the bugs or technical issues and become inactive after the problems
 solved. Also, by observing the clustered participants of their
 activity patterns in Figure 3, we suspect that the phasers that show
 up densely together could be interested in similar categories of
-topics. This assumption would be validated in Section
+topics. This assumption is validated in Section
 \ref{validation}. 
 
 
 \begin{figure}[!t]
 \centerline{\includegraphics[width=4.1in, height = 4.3cm]{people.png}
 \label{people}}
-\caption{Number of active participants along time line}
+\caption{Number of active participants across time.}
 \end{figure}
 
 \begin{figure}[!t]
 \centerline{\includegraphics[width=4.1in, height = 4.3cm]{betweenness.png}
 \label{betweenness}}
-\caption{Sum of betweenness value along time line}
+\caption{Sum of betweenness centrality of participants across time.}
 \end{figure}
 
+%XXX again you don't answer a research question by making stuff up
+% relate this to your validation or remove it.
+% If it can't be validated don't bother saying it as an answer to a question.
 Meanwhile, other possible explanations for the very sharp change in
 the participants' centrality could be: 1) the participants are pure
 users; they showed up merely to report bugs they found. These bugs
 attract other users or developers to take part in the discussion,
 which would increase the betweenness centrality of the bug reporters,
 i.e., the users, for a very short time period. 2) The participants are
-developers and they left their jobs temporarily, for a vacation for
-example. Besides, they could also leave their jobs permanently because
-of retiring or working for another project. 3) The project is just
+developers and are on a temporary leave, a vacation for
+example. 
+3) The project is just
 finished or discarded so that both users and developers would not
 discuss anything about it any more. This group of participants could be
 verified by looking for those who do not own any submission and then
-regarded as pure users. The third explanation would be easily
+regarded as pure users. 
+The third explanation would be easily
 substantiated by inspecting Android version release history. However,
 the second explanation is hard or even impossible to validate with the
 very limited information we could get from the repositories and the
 release history. Participants should be contacted in person for such
 validation, which has not been done in our study.
+%XXX GRRR Answer the question! Stop making stuff up. Link it to evidence.
 
 
 
+%XXX This section needs to be integrated with the research question
+%answers. I don't have the time to do this. 
 
 \section{Validation}
 \label{validation}
@@ -1199,27 +1203,25 @@ Among the 1654 participants with betweenness values larger than 0, we
 analyzed their centrality patterns and divide them into three
 categories: 
 
-1) participants appeared only once, with a number of 71 out of 1654
-participants (we are not considering those eliminated participants
-with betweenness values equal to 0, these eliminated participants
-actually count up to a number of 30969 - 1654 = 29315), 
-2) participants recurred periodically, with a number of 1575 participants,
-and 3) participants who are central along the entire time line, with a
-number of 8 participants.
+1) participants appeared only once with a betweeness greater than 0 (71 out of 1654
+participants),
+2) participants recurred periodically (1575 participants)
+and 3) participants who are central along during the entire project
+history (8 participants).
 
 
 From the mining results, we notice that there is a small group of
-participants who have been central for almost all the time; another
+participants who have been central for most of our analysis period; another
 relatively larger group appear without any recurrence; the majority
 would periodically become central in their community. Based on the
-three activity patterns, we have found some interesting discoveries as
-following:
+three activity patterns, we confirmed many of our previous suspicions:
 
-
+%XXX MENTION WHICH RQ IS RELEVANT
 \subsubsection{Participants appeared only once tend to be pure users}
-We look into the Android changes repository to find the files
+
+We look into the Android version control system to find the files
 submitted by the 71 participants who have appeared only once in the
-bug community. We find that 7 of them have ever submitted a change,
+bug community. We find that only 7 of them have ever submitted a change,
 which means that they probably are developers other than pure Android
 users. However, these 7 participants only take up 10\% of the total 71
 participants and most of them have never submit anything to the
@@ -1227,7 +1229,7 @@ development community. This verifies our assumption that participants
 appeared only once in the bug community would more likely be pure
 users.
 
-
+%XXX MENTION WHICH RQ IS RELEVANT
 \subsubsection{Participants showed up periodically should be a combination of users and developers}
 Periodically appearing participants are the majority and they are
 called phasers. We sampled 4 continuous portions of them (continuous
@@ -1255,7 +1257,7 @@ specific topics.
 %% increase table row spacing, adjust to taste
 % if using array.sty, it might be a good idea to tweak the value of
 % \extrarowheight as needed to properly center the text within the cells
-\caption{5 continuously central participants who have submissions in the changes repository. On the forth row, ralf and Ralf.Hildebrandt are email alias of the same person, as we observed that the author\_name attributes are the same for the two email alias.}
+\caption{5 continuously central participants who have submissions in the version control system. On the forth row, ralf and Ralf.Hildebrandt are email alias of the same person, as we observed that the author\_name attributes are the same for the two email alias.}
 \label{continuous_project}
 \centering
 %% Some packages, such as MDW tools, offer better commands for making tables
@@ -1281,42 +1283,50 @@ MagicSmoke, MusicVisualization), prebuilt, sdk, system\_core) \\
 \end{tabular}
 \end{table}
 
+%XXX MENTION WHICH RQ IS RELEVANT
 
 \subsubsection{Participants who were continuously central could have multiple specialties}
 
 5 out of the 8 participants in this group have submissions in the
-changes repository and they take up to 62.5\%, which is significantly
-larger than the previous two groups.
-
-
+version control system.
+% XXX What did you mean here VVV this makes no sense whatosever
+% and they take up to 62.5\%, which is significantly
+% larger than the previous two groups.
 We extracted the projects these 5 participants have submitted changes
 to, as listed in Table \ref{continuous_project}.
 
 
 Firstly, considering the number of changes they made, all of them
-except mblign have submitted more than 500 files to the changes
-repository, which means that they are quite active in Android
+except \texttt{mblign} have more than 500 commits within the
+version control system,
+which means that they are quite active in Android
 development community. This could to some extent prove that they are
-experts or advanced developers since more submissions usually
-represent broader knowledge about the related techniques, especially
-in such volunteered open source development community.
+experts or advanced developers since more submissions indicates a
+ broader range knowledge about the related techniques.
+% If you don't know, don't say it
+%, especially
+%in such volunteered open source development community.
 
 
-Moreover, fadden, xav, and romainguy are all working on the platform,
+Moreover, \texttt{fadden}, \texttt{xav}, and \texttt{romainguy} are
+all working on the platform layer,
 which includes build, dalvik, development, framework base, libcore,
-sdk, etc. All of their specialties are related to the platform or
-system core aspects, and should be important along the entire
-development. In this case, continuously central participants should
-have experiences on the system core related topics. This is an
-interesting point beyond our hypothesis.
+sdk, etc. All of their specialties are related to the platform layer or
+system core layer.
+% and should be important along the entire
+%development. 
+%In this case, continuously central participants should
+%have experiences on the system core related topics. 
+%This is an
+%interesting point beyond our hypothesis.
 
-
-Further, the participant romainguy has experiences on almost every
-part related to platforms, including both the apps and the core, and
+The participant \texttt{romainguy} has experiences modifying almost every
+component relevant to platforms, including both the apps and the core, and
 hence should be considered as Android platform development leader.
 
 
-To summarize, three different centrality patterns correspond to
+To summarize, this subsection and the past 2 subsection demonstrate
+that three different centrality patterns correspond to
 participants of three categories, which proves our analysis hypothesis
 in Section \ref{results}.
 
@@ -1430,6 +1440,7 @@ v3.0 & Feb. 22, 2011 & UI design for tables, redesigned keyboard, improved text 
 
 
 
+%XXX MENTION WHICH RQ IS RELEVANT
 
 \subsection{Cluster validation}
 
@@ -1446,7 +1457,7 @@ We denoted 21 visible clusters from Figure 3 and looked into five of them.
 The five clusters we chose are listed in Table \ref{cluster_list}
 
 
-We extract changes submitted by the members of each cluster from the Android changes repository. (For those who do not have records in the changes repository, we regard them as pure users and do not consider them in this case). After inspecting their submissions, we would get an idea about what kind of tasks they have been mostly working on.
+We extract changes submitted by the members of each cluster from the Android version control system. (For those who do not have records in the version control system, we regard them as pure users and do not consider them in this case). After inspecting their submissions, we would get an idea about what kind of tasks they have been mostly working on.
 We take both the release history and the change submission records as
 the fact in reality, and we find our hypothesis in Section
 \ref{results} matched with the reality we got here. 
@@ -1454,6 +1465,7 @@ the fact in reality, and we find our hypothesis in Section
 
 We have found the following facts that prove our hypothesis:
 
+%XXX MENTION WHICH RQ IS RELEVANT
 
 \subsubsection{Participants clustered together share similar specialties and tasks}
 
@@ -1463,7 +1475,7 @@ topics or working on tasks related to the same area.
 
 
 As described in Section \ref{methodology}, we extract the targets and
-project names from the changes repository for each member appeared
+project names from the version control system for each member appeared
 within the cluster. The specialties could be inferred by the contents
 of the targets and the topics of the projects. Specialties of clusters
 are summarized in Table \ref{cluster_topic}:
@@ -1511,6 +1523,7 @@ Thus, from the observation and analysis above, we can conclude that
 participants with similar centrality patterns share similar
 specialties and tasks.
 
+%XXX MENTION WHICH RQ IS RELEVANT
 
 \subsubsection{Clusters' working specialties are in accordance with the release contents along the time line}
 
@@ -1643,7 +1656,7 @@ participants.
 We analyze the results based on another assumption that the types of
 submitted files reflect the techniques the developers are specialized
 in. Hence, we tagged the participants with the techniques according to
-their submitted files in the Android changes repository. However,
+their submitted files in the Android version control system. However,
 there could exists inconsistency to some extend between the techniques
 and the submitted files. 
 
@@ -1663,8 +1676,8 @@ evolution of Android bug reporting community, on view of both globally
 and locally. Moreover, after manually inspecting Android version
 history, we found answers to explain sharp changes and occurrences of
 specific time ranges. Most minor or major releases lead to high
-betweenness centrality in general. With the data from Android changes
-repository, we further validated the three activity patterns of bug
+betweenness centrality in general. With the data from Android version
+control system, we further validated the three activity patterns of bug
 participants and find reasons for their being clustered. Participants
 who have high betweenness centrality at the same time period show
 interest in the same topics and acquire related techniques.

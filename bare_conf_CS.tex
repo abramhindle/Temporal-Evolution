@@ -948,7 +948,7 @@ clusters we observed.
 In order to find out how the community participants
 act in accordance with the project development and why some
 participants are more likely to be clustered into the same group, we
-looked into their commit history to find their specialties.
+looked into their commit history to find their areas of expertise.
 
 
 The types of files modified and the corresponding projects are highly
@@ -957,7 +957,7 @@ instance, if a developer always submits kernel related code
 files, they are more likely to be specialized in kernel techniques. We
 extracted the submissions related to the developer from the version
 control system.
-We manually identified the participants specialties by
+We manually identified the participants areas of expertise by
 observing the ``project'' and the
 ``target'' for all of their commits (such as source code or
 documentation).
@@ -1221,36 +1221,50 @@ three activity patterns, we confirmed many of our previous suspicions:
 
 We look into the Android version control system to find the files
 submitted by the 71 participants who have appeared only once in the
-bug community. We find that only 7 of them have ever submitted a change,
-which means that they probably are developers other than pure Android
-users. However, these 7 participants only take up 10\% of the total 71
-participants and most of them have never submit anything to the
-development community. This verifies our assumption that participants
+bug community. We find that only 7 of them have ever submitted a
+change, which means that these 7 probably are likely developers rather
+than pure Android users. The rest do not have commits in the version
+control system. This verifies our assumption that participants
 appeared only once in the bug community would more likely be pure
 users.
 
 %XXX MENTION WHICH RQ IS RELEVANT
 \subsubsection{Participants showed up periodically should be a combination of users and developers}
-Periodically appearing participants are the majority and they are
-called phasers. We sampled 4 continuous portions of them (continuous
-means they are continuously numbered in the clustered results):
-participants 430 to 474, 704 to 742, 1418 to 1447, and 1543 to
-1584. For each of the four groups, the number of developers are 5, 13,
-9, 7 respectively. They take up 17\%, 32\%, 20\%, and 18\% of the
-total number of participants in each group. 
+% y=742-704 + 1
+% x=474 - 430 + 1
+% z = 1447 - 1418 + 1
+% y = 1584 - 1543 + 1
+% u = 1584 - 1543 + 1
+% y=742-704 + 1
+% y
+% 39
+% u
+% 42
+% u+y+x+z
+% 156
+% (5+13+9+7)/(u+y+x+z)
+% .21794871794871794871
 
+Periodically appearing participants are the majority and we call them
+\emph{phasers}. 
+% We sampled 4 continuous portions of them (continuous
+% means they are continuously numbered in the clustered results):
+% participants 430 to 474, 704 to 742, 1418 to 1447, and 1543 to
+% 1584. For each of the four groups, the number of developers are 5, 13,
+% 9, 7 respectively. They take up 17\%, 32\%, 20\%, and 18\% of the
+% total number of participants in each group. 
+We sampled 156 participants and of them $21.8\%$ were developer phasers.
 
-Further, we studied the specialties of the developer participants from
-the four sampled groups. All except two of them have worked on tasks
-related with specific techniques so that they are actually specialized
-in some topics. 
-
+We studied the expertise of the developer participants from this
+sample. All except two of them have worked on single focus tasks that
+implied some kind of expertise or specialization.
 
 The rest of the periodically appearing participants have never
 submitted files to the development community. They are probably users
 of Android. Thus, phasers consist of both users and
-developers. Developers of this group are usually interested in some
-specific topics.
+developers. Developers of this group are tended to focus on specific
+topics.
+
 
 
 \begin{table}[!t]
@@ -1285,7 +1299,7 @@ MagicSmoke, MusicVisualization), prebuilt, sdk, system\_core) \\
 
 %XXX MENTION WHICH RQ IS RELEVANT
 
-\subsubsection{Participants who were continuously central could have multiple specialties}
+\subsubsection{Participants who were continuously central could have multiple areas of expertise}
 
 5 out of the 8 participants in this group have submissions in the
 version control system.
@@ -1311,7 +1325,7 @@ experts or advanced developers since more submissions indicates a
 Moreover, \texttt{fadden}, \texttt{xav}, and \texttt{romainguy} are
 all working on the platform layer,
 which includes build, dalvik, development, framework base, libcore,
-sdk, etc. All of their specialties are related to the platform layer or
+sdk, etc. All of their areas of expertise are related to the platform layer or
 system core layer.
 % and should be important along the entire
 %development. 
@@ -1357,14 +1371,14 @@ Cluster & Time  \\
 \renewcommand{\arraystretch}{1.3}
 % if using array.sty, it might be a good idea to tweak the value of
 % \extrarowheight as needed to properly center the text within the cells
-\caption{Participants and their specialties in cluster No. 4}
+\caption{Participants and their areas of expertise in cluster No. 4}
 \label{cluster_no4}
 \centering
 %% Some packages, such as MDW tools, offer better commands for making tables
 %% than the plain LaTeX2e tabular which is used here.
 \begin{tabular}{|c|c|c|}
 \hline
-ID & Name & Specialties \\
+ID & Name & Areas Of Expertise \\
 \hline
 1 & Charles Chin & kernel - sound, kernel\_linux-2.6 \\
 \hline
@@ -1387,14 +1401,14 @@ ID & Name & Specialties \\
 %% increase table row spacing, adjust to taste
 % if using array.sty, it might be a good idea to tweak the value of
 % \extrarowheight as needed to properly center the text within the cells
-\caption{Participants' common specialties of each cluster. Participants number is counted as the number of participants within each cluster who has ever submitted a change and appeared in the change repository, ie., developers.}
+\caption{Participants' common areas of expertise of each cluster. Participants number is counted as the number of participants within each cluster who has ever submitted a change and appeared in the change repository, ie., developers.}
 \label{cluster_topic}
 \centering
 %% Some packages, such as MDW tools, offer better commands for making tables
 %% than the plain LaTeX2e tabular which is used here.
 \begin{tabular}{|c|c|c|}
 \hline
-Cluster & Participants Number & Specialties \\
+Cluster & Participants Number & Areas Of Expertise \\
 \hline
 1 & 5 & netfilter, driver(video), tests, MIPS \\
 \hline
@@ -1413,7 +1427,7 @@ Cluster & Participants Number & Specialties \\
 %% increase table row spacing, adjust to taste
 % if using array.sty, it might be a good idea to tweak the value of
 % \extrarowheight as needed to properly center the text within the cells
-\caption{Release time and contents, nearby which our chosen clusters are located}
+\caption{Highlights of identified clusters from Figure 3}
 \label{release}
 \centering
 %% Some packages, such as MDW tools, offer better commands for making tables
@@ -1441,33 +1455,38 @@ v3.0 & Feb. 22, 2011 & UI design for tables, redesigned keyboard, improved text 
 
 
 %XXX MENTION WHICH RQ IS RELEVANT
-
 \subsection{Cluster validation}
 
 As we have discussed above, participants are more active around
 important releases. Moreover, we can observe from Figure 3 that
-participants' centrality distributions tend to form into groups, which
-locate around the release point, i.e., when participants are clustered
-according to their centrality values, they form into
-groups. Participants belonging to the same group become central during
+participants' centrality distributions tend to form into groups or
+clusters, that often
+are found around the releases.
+Participants belonging to the same group become central during
 the same time periods and then fade away together.
-
 
 We denoted 21 visible clusters from Figure 3 and looked into five of them. 
 The five clusters we chose are listed in Table \ref{cluster_list}
 
+We extract changes submitted by the members of each cluster from the
+Android version control system. (For those who do not have records in
+the version control system, we regard them as pure users and do not
+consider them in this case). After inspecting their submissions, we
+would get an idea about what kind of tasks they have been mostly
+working on.  
+Based on release history and the commit logs we 
+that these clusters tend to be coherent efforts by multiple kinds of participants.
+%XXX I have no idea what RQ you are talking about. PLEASE SPECIFY
+% WHICH HYPOTHESIS
+This confirms our hypothesis
+from Section \ref{results}.
 
-We extract changes submitted by the members of each cluster from the Android version control system. (For those who do not have records in the version control system, we regard them as pure users and do not consider them in this case). After inspecting their submissions, we would get an idea about what kind of tasks they have been mostly working on.
-We take both the release history and the change submission records as
-the fact in reality, and we find our hypothesis in Section
-\ref{results} matched with the reality we got here. 
 
-
-We have found the following facts that prove our hypothesis:
+%We have found the following facts that prove our hypothesis:
 
 %XXX MENTION WHICH RQ IS RELEVANT
 
-\subsubsection{Participants clustered together share similar specialties and tasks}
+\subsubsection{Participants clustered together share similar areas of expertise and tasks}
 
 Our analysis in Section \ref{results} shows that the phasers that show
 up densely together could be interested in similar categories of
@@ -1476,9 +1495,10 @@ topics or working on tasks related to the same area.
 
 As described in Section \ref{methodology}, we extract the targets and
 project names from the version control system for each member appeared
-within the cluster. The specialties could be inferred by the contents
-of the targets and the topics of the projects. Specialties of clusters
-are summarized in Table \ref{cluster_topic}:
+within the cluster. The areas of expertise could be inferred by the contents
+of the targets and the topics of the projects. We summarized the
+areas of expertise of participant clusters (from Figure 3)
+ in Table \ref{cluster_topic}.
 
 
 % An example of a floating table. Note that, for IEEE style tables, the 
@@ -1486,67 +1506,72 @@ are summarized in Table \ref{cluster_topic}:
 % \footnotesize as IEEE normally uses this smaller font for tables.
 % The \label must come after \caption as always.
 
-Inspecting the specialties, we find that each cluster has their own
-topics, which are relatively different from others'. Also, topics of
-each cluster are concentrated on a limited specific technique
-areas. For example, cluster No.1 covers techniques about net filters,
+Inspecting the areas of expertise, we find that each cluster has their own
+topics, which are relatively different from each other. Also, the topics of
+each cluster are concentrated to specific layers of Android's architecture.
+For example, cluster No.1 covers techniques about net filters,
 drivers, tests, and MIPS, while cluster No.2 is about drivers for
 connecting devices (usb, wireless, and mouse), net, processor, and
-input. It is easy to tell that participants of these two clusters are
-working on different tasks. The other clusters could lead to the same
-conclusion. This concludes that each cluster has its own
-participants-shared specialties.
+input. 
+It is easy to tell that participants of these two clusters are
+working on different tasks. 
+The other clusters could lead to the same
+conclusion. 
+Thus we conclude that clusters often exist around a topic.
 
+% AH: not a clear or useful point
+% if we look into one of the clusters, we can see that
+% sub-groups exist in each cluster, and each sub-group works on one
+% common topic. 
 
-Further, if we look into one of the clusters, we can see that
-sub-groups exist in each cluster, and each sub-group works on one
-common topic. Take cluster No.4 as an example. There are 7 developers
+Take cluster No.4 as an example. There are 7 developers
 contained in this cluster, as listed in Table \ref{cluster_no4}.
-
-
-It can be obviously observed that work of participants in this cluster
-could be generally divided into two groups: one is about the linux 2.6
+It can be observed that work of participants in this cluster
+could be generally divided into two groups: one is about the Linux 2.6
 based kernel, another is on stuffs related to media. Charles Chin, Rik
-Bobbaers, Rikard Olsson, and Riku Voipio are all doing the linux 2.6
+Bobbaers, Rikard Olsson, and Riku Voipio are all modifying the Linux 2.6
 kernel. Charles Chin, Josh Guilfoyle, and Kristoffer are working on
-the media, which actually includes sound, video drivers, or
-ringtone. Besides, we even guess that these two specialties may have
-strong connection so that those who work on the kernel are likely to
-work on the media related part. For example, the projects Charles Chin
-is working on are all about the kernel, with sound as the target,
-which means he is working on the sound related kernel, and it is the
-same with Kristoffer.
+the media, which includes sound, video drivers, and
+ringtone. 
+% XXX DONT MAKE STUFF UP
+%Besides, we even guess that these two areas of expertise may have
+%strong connection so that those who work on the kernel are likely to
+%work on the media related part. 
+% For example, the projects Charles Chin
+% is working on are all about the kernel, with sound as the target,
+% which means he is working on the sound related kernel, and it is the
+% same with Kristoffer.
+% l
 
-
-If we look into other clusters, we can make the same conclusions.
+% XXX did you look at other clusters?
+If we look into other clusters, we can often make similar conclusions.
 Thus, from the observation and analysis above, we can conclude that
-participants with similar centrality patterns share similar
-specialties and tasks.
+participants with similar centrality patterns often share similar
+areas of expertise and tasks.
 
 %XXX MENTION WHICH RQ IS RELEVANT
+\subsubsection{Clusters' working areas of expertise are in accordance with the release contents along the time line}
 
-\subsubsection{Clusters' working specialties are in accordance with the release contents along the time line}
-
-When observing the Android release history, we have made conclusion
-that the overall betweenness centrality becomes higher when there are
+When observing the Android release history, we concluded
+that the overall betweenness centrality becomes higher around
 releases, and more active participants appear around important
-releases, according to Figure 4 and Figure 5.
+releases, at least according to Figure 4 and Figure 5.
 
 
-In addition, when taking participants' specialties into consideration,
+In addition, when taking participants' areas of expertise into consideration,
 we find that the release contents are in accordance with the
-specialties for members of each cluster. Table \ref{release} lists
+areas of expertise for members of each cluster. Table \ref{release} lists
 releases and their corresponding clusters together with the
 highlighted working contents.
 
 
-Comparing the release contents and the cluster specialties, these two
+Comparing the release contents and the cluster areas of expertise, these two
 subjects are mostly matched on release topics and cluster's working
 contents. For example, cluster No.4 covers from December 3, 2010 to
 January 31, 2011, which locates before release v2.3. Participants in
-cluster No.4 have specialties on sound, media, and kernel-video, which
+cluster No.4 have areas of expertise on sound, media, and kernel-video, which
 match the release contents of new multimedia, APIs for native audio,
-and mixable audio effects in v2.3; specialties about driver on video,
+and mixable audio effects in v2.3; areas of expertise about driver on video,
 input and keyboard match the contents featured on video driver and the
 faster text input accordingly. We can also find that 4 out of 7
 developers in cluster No.4 has worked on kernel 2.6, which corresponds
@@ -1562,7 +1587,7 @@ accordance. This phenomenon happens in cluster No.1 and its
 corresponding release v2.2 as well.
 
 
-Therefore, the conclusion is that participants' working specialties
+Therefore, the conclusion is that participants' working areas of expertise
 within clusters are in accordance with the related release contents
 along the time line.
 

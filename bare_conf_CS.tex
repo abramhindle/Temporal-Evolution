@@ -1568,28 +1568,28 @@ highlighted working contents.
 Comparing the release contents and the cluster areas of expertise, these two
 subjects are mostly matched on release topics and cluster's working
 contents. For example, cluster No.4 covers from December 3, 2010 to
-January 31, 2011, which locates before release v2.3. Participants in
-cluster No.4 have areas of expertise on sound, media, and kernel-video, which
+January 31, 2011, which occurs before release v2.3. Participants in
+cluster No.4 have areas of expertise relevant to sound, media, and kernel-video, which
 match the release contents of new multimedia, APIs for native audio,
-and mixable audio effects in v2.3; areas of expertise about driver on video,
-input and keyboard match the contents featured on video driver and the
-faster text input accordingly. We can also find that 4 out of 7
-developers in cluster No.4 has worked on kernel 2.6, which corresponds
-to the linux kernel upgraded to 2.6.36 in v2.3.
+and mixable audio effects in v2.3; 
+%areas of expertise about video drivers,
+%input and keyboards match the contents featured on video driver and the
+%faster text input accordingly. 
+We can also find that 4 out of 7
+developers in cluster No.4 have worked on the kernel when 
+the linux kernel was upgraded to 2.6.36 in Android v2.3.
 
-For cluster No.3, which ranges from January 13, 2011 to March 3, 2011,
-during which time v2.2.1 and v2.2.2 are released on January 18, 2011
-and January 22, 2011 respectively. Release 2.2.1 contains security
-updates and performance improvement, which should focus on the bottom
-layer; at the same time, participants in cluster No.3 are specialized
-mostly on kernels or platforms. These two facts are thus in
-accordance. This phenomenon happens in cluster No.1 and its
-corresponding release v2.2 as well.
+Cluster No.3 was centered around the releases of v2.2.1 and v2.2.2
+(January 18, 2011 and January 22, 2011 respectively). Release 2.2.1
+contained security updates and performance improvement; participants
+in cluster No.3 are specialized mostly on kernels or platforms.  
+This occurs in cluster
+No.1 and its corresponding release v2.2 as well.
 
 
-Therefore, the conclusion is that participants' working areas of expertise
-within clusters are in accordance with the related release contents
-along the time line.
+Our conclusion is that participants' work is relevant to areas of expertise
+associated with clusters, as well the clusters and participation tends
+to be correlated with releases.
 
 % An example of a floating figure using the graphicx package.
 % Note that \label must occur AFTER (or within) \caption.
@@ -1669,49 +1669,57 @@ first name. We cannot distinguish these names with the email address
 start with a simple letter which is ambiguous identifying a person,
 while we analyze the results without excluding such data.
 
+% In addition, among the 1654 bug participants whose betweenness
+% centrality has ever been larger than 0, more than 1500 of them are
+% periodically appearing participants. We sampled 4 groups of participants
+% since the results from these sampled data are representative to
+% substantiate the assumption we have made for periodically appearing
+% participants.
 
-In addition, among the 1654 bug participants whose betweenness
-centrality has ever been larger than 0, more than 1500 of them are
-periodically appearing participants. We sampled 4 groups of participants
-since the results from these sampled data are representative to
-substantiate the assumption we have made for periodically appearing
-participants.
-
-
-We analyze the results based on another assumption that the types of
+We analyze the results based on the assumption that the types of
 submitted files reflect the techniques the developers are specialized
 in. Hence, we tagged the participants with the techniques according to
 their submitted files in the Android version control system. However,
 there could exists inconsistency to some extend between the techniques
-and the submitted files. 
+and the submitted files.
 
+Our choice of the number of clusters to use in K-means was based on
+our interpretation and sense aesthetics of the resulting plots, thus
+the exact parameters of this plot might not be reproducible by others.
+
+Our manual inspection increased the validity of the results, but it
+still relied on the authors judgment, interpretation and potential bias.
 
 \section{Conclusion and Future Work}
 % take up 1 column
 \label{conclusion}
 
 In this paper, we mined the Android bug repository and studied the
-data of 2010 and 2011. We used an overlapping time windowing technique
-and applied social network analysis to analyze the bug reports
-community. 
+data of 2010 and 2011. We combined overlapping time windows with
+social network analysis in order to analyze the participants
+interactions within the Android bug repository and Android open-source community.
 
-
-We did our analysis by answering four questions about the temporal
-evolution of Android bug reporting community, on view of both globally
-and locally. Moreover, after manually inspecting Android version
-history, we found answers to explain sharp changes and occurrences of
-specific time ranges. Most minor or major releases lead to high
-betweenness centrality in general. With the data from Android version
-control system, we further validated the three activity patterns of bug
-participants and find reasons for their being clustered. Participants
-who have high betweenness centrality at the same time period show
-interest in the same topics and acquire related techniques.
+Android was the case study for windowed our SNA analysis, and we
+analyzed multiple questions regarding the effectiveness of this
+technique on Android.  We analyzed the temporal evolution of Android
+bug reporting community both globally and locally.  Moreover, we
+validated these results by manually inspecting Android version control
+system history. We found we explain sharp changes and and the
+appearance of centrality clusters.  For Android we found that most
+minor or major releases lead to high betweenness centrality in
+general. With the data from Android version control system, we further
+validated the three activity patterns of bug participants and found
+reasons for their behaviour and their expertise.  Participants who
+appeared in the same cluster in our plots tended to 
+have high betweenness centrality at the time and tended to show interest
+in a set of similar topics.
 
 
 Future work includes applying the approach in this paper to other open
-source projects' repository, so as to expect whether results from our
-overlapping time windowing SNA are trustworthy enough to reflect facts
-in the actual developing process. 
+source projects' repository in order to improve its generality. We
+want to further validate if our overlapping time windowing SNA plots
+are trustworthy enough to depict the actual develop processes of
+various projects.
 
 
 

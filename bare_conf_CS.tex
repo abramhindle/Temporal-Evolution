@@ -813,7 +813,9 @@ where A and B are two vectors, $\{\cdot\}$ represents the inner dot
 operation and $\Arrowvert \cdot \Arrowvert$ indicates the module of
 the vector. With clustering, authors with similar temporal centrality would be
 grouped together so that bug participants with similar activity
-patterns would also be grouped together. 
+patterns would also be grouped together.  In this study we used
+K-means, where $K =
+100$, to cluster authors.
 
 
 \section{Methodology}
@@ -821,10 +823,10 @@ patterns would also be grouped together.
 \subsection{Data}
 
 With the provided Android bug repository and the Android changes
-repository from the MSR challenge, we converted the XML format data to
+repository from the MSR Challenge~\cite{DATA:msr}, we converted the XML format data to
 a database for efficient analysis using Microsoft SQL Server Business
-Intelligence. Our analysis focuses on the bug records of the previous
-two years from January 1st 2010 to December 4th 2011 since people
+Intelligence. Our analysis focused on the bug records of the previous
+two years from January 1st 2010 to December 4th 2011 since participants
 during these two years are more active than the other years and the
 activities are representative, as showed in Figure 2. The data we used
 covers 14,432 out of 20,169 total bug records and 46,806 out of 67,730
@@ -834,18 +836,17 @@ bug.
 
 
 The bug and comment records are grouped into 30-day windows sliding by
-1 day. The strategy of taking 30 days as a window and sliding by 1 day
-would be discussed in detail in Section \ref{methodology}. With this
-windowing strategy, we extracted 673 windows in total from the records
-of bug communities, despite of the data not provided after December
-4th, 2011.
+1 day. 
+%The strategy of taking 30 days as a window and sliding by 1 day
+%would be discussed in detail in Section \ref{methodology}. 
+We extracted 673 daily windows  from the bug reports we selected.
 
-
-In addition, we make use of the data from Android changes repository
-to validate the mining results. The \textquotedblleft
-project\textquotedblright \ and the \textquotedblleft
-target\textquotedblright \ schema record all the submitted files from
-the developers, from which the actual behaviours could be identified.
+In addition, we made use of the data from Android version control
+system (git)
+to validate the mining results.
+%  The 
+% ``project'' \ and the ``target'' \ schema record all the submitted files from
+% the developers, from which the actual behaviours could be identified.
 
 
 \begin{figure*}[ht]
@@ -856,8 +857,13 @@ the developers, from which the actual behaviours could be identified.
 \end{figure*}
 
 
-\subsection{Methodology}
-We windowed the data based on the time series and constructed networks indicating the relations among the participants within each specific window. Then, we calculated the betweenness centrality of each participant and drew the final graph. The steps of our methodology are explained as following:
+\subsection{Windowing Bug Reports and Extracting Social Networks Methodology}
+We windowed the data based on the time series and constructed networks
+that indicated the relations among the participants within each specific
+time window. Per each window, we calculated the betweenness centrality of each
+participant and plotted the centrality per author in a visualization. The steps of our methodology are
+explained as following:
+
 
 \textbf{Step 1: Pruning the data.} We pruned the records of the reporters and commenters into pure name format, which are originally recorded in semi-anonymous email formats in the XML repository dump. For example, given the original email address which is represented by \textquotedblleft mathias....@gmail.com\textquotedblright, we truncate the string starting from \textquotedblleft ....\textquotedblright \ and keep the front part \textquotedblleft mathias\textquotedblright \ at the beginning as the name of the reporter or commenter. This strategy could lead to name aliasing problem, especially for common names or email addresses starting at just a simple letter like \textquotedblleft e....@gmail.com\textquotedblright. It is difficult or even impossible to eliminate the influence from this problem. Hence, we focus on the behaviour of normal cases, which means the cases where the names are less common and less ambiguous.
 

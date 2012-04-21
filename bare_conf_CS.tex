@@ -543,7 +543,7 @@ The betweenness centrality could reveal two aspects of a participant
 in a community network: 1) the quantity of bug reports (which attract
 at least one comment) or comments they have made and 2) the importance
 of the content of their reports or comments. 
-When people have high betweenness, they might have: 1) reported
+When participants have high betweenness, they might have: 1) reported
 quantities of bugs with at least one comment on them, 2) made lots of
 comments, 3) reported a very critical bug, 4) or made a very
 interesting comment which attracts comments from other participants.
@@ -761,7 +761,7 @@ nuanced view of the data \cite{ICSEsocio:meneely}
 be ``drowned out''. For instance, if a
 bug participant participated in many bug reports and bug comments during one
 month from January 1st to January 30th, 2010, within this window, they
-would be one of the most central people with a high
+would be one of the most central participants with a high
 betweenness. However, if they never appeared except for that
 month, globally, they would have low betweenness and would not show up
 as central
@@ -1006,50 +1006,56 @@ following questions:
 \textbf{RQ1. How does the number of active bug participants change over time? Why?}
 
 To give an overview, we compared the interaction of bug participants
-between 2010 and 2011 along the time line, and found that the
-interaction among people in Android bug community in 2011 was similar
-to the interaction of people in 2010 but more frequent. One
-\textquotedblleft gap\textquotedblright \ occurs around window 300,
-which we would explain in the local comparison Section later. 
+between January, 2010 and December, 2011, and found that the
+interaction among participants in Android bug community in 2011 was similar
+to the interaction of participants in 2010 but more frequent. One
+``gap'' occurs around window 300,
+which we will explain in the Section \ref{local} later. 
 
 
-In addition, correspondingly in Figure 4, the number of active people
+In Figure 4 the number of active participants
 during 2011 is slightly larger than that of 2010. Also, we can observe
-that a \textquotedblleft gap\textquotedblright \ around the window
+a ``gap'' around the window
 300. Figure 5 shows the sum of betweenness values along the two years'
 time line, we can see that the trend is very similar to that of the
-number of active people in Figure 4. This suggests that with more
-people participating in bug reporting community, the interaction among
+number of active participants in Figure 4. This suggests that with more
+participants participating in bug reporting community, the interaction among
 them increases accordingly.
 
 
-The reason for the changes of the number of active bug participants
+A possible reason for the changes of the number of active bug participants
 and the betweenness centrality values is that around major or minor
-releases of SDKs, API fixes or improvements, people would become more
-active taking part in bug reporting, discussing and fixing
+releases of SDKs, API fixes or improvements, participants seem to become more
+active in bug reporting, discussing and fixing
 activities. Also, during these time periods, bugs are more likely to
-be discovered and reported. Because with the product release pressure,
-developers would probably work longer and harder than usual with more
-effort and passion, which promotes the discovery of more bugs and
-problems of the project. And when the release date is approaching,
-they have to work hard to fix these bugs. On the other hand, after the
-release, tremendous users also take part in the activity of
+be discovered and reported. 
+Perhaps the pressure of the release is 
+causing developers to address outstanding bugs more than usual.
+% AH: You can't just say this stuff, if you don't know you gotta admit it
+% would probably work longer and harder than usual with more
+%effort and passion, which promotes the discovery of more bugs and
+%problems of the project. 
+%And when the release date is approaching,
+%they have to work hard to fix these bugs. 
+After a
+release, users also take part in the activity of
 discovering the bugs and problems so that in this case both users and
-developers would like to discuss the bugs. The bug community becomes
-lively. 
+developers would like to discuss the bugs. 
+%The bug community becomes
+%lively. 
 
 
 \textbf{RQ2. How does the betweenness centrality of a participant change over time? What are the reasons if they have a certain activity pattern?}
 
 Observing the continuity of betweenness centrality in Figure 3, some
-people have kept active during the entire two years, and
+participants have kept active during the entire two years, and
 correspondingly they have a very continuous highlighted line. For
 participants of this type, there are possible explanations. 
 
 
-First, we suspect these people to be professional developers who
+First, we suspect these participants are professional developers who
 belong to the core development team so that what they reported are
-more important issues which attract more people to discuss and fix
+more important issues which attract more participants to discuss and fix
 them. 
 
 
@@ -1113,8 +1119,8 @@ belonging to bug reports several weeks or months before.
 \textbf{RQ4. What are the possible scenarios for a very sharp change of the participants' centrality?}
 
 Considering individual participants, almost all of them has
-experienced centrality oscillations. In addition, some groups of
-people tend to become active and core members during the same time
+experienced centrality oscillations. In addition, some participants
+tend to become active and core members during the same time
 period and then they fade away together. We call them phasers, who
 phase into centrality and later out of it.
 
@@ -1133,7 +1139,7 @@ topics. This assumption would be validated in Section
 \begin{figure}[!t]
 \centerline{\includegraphics[width=4.1in, height = 4.3cm]{people.png}
 \label{people}}
-\caption{Number of active people along time line}
+\caption{Number of active participants along time line}
 \end{figure}
 
 \begin{figure}[!t]
@@ -1152,7 +1158,7 @@ developers and they left their jobs temporarily, for a vacation for
 example. Besides, they could also leave their jobs permanently because
 of retiring or working for another project. 3) The project is just
 finished or discarded so that both users and developers would not
-discuss anything about it any more. This group of people could be
+discuss anything about it any more. This group of participants could be
 verified by looking for those who do not own any submission and then
 regarded as pure users. The third explanation would be easily
 substantiated by inspecting Android version release history. However,
@@ -1185,7 +1191,7 @@ number of 8 participants.
 
 
 From the mining results, we notice that there is a small group of
-people who have been central for almost all the time; another
+participants who have been central for almost all the time; another
 relatively larger group appear without any recurrence; the majority
 would periodically become central in their community. Based on the
 three activity patterns, we have found some interesting discoveries as
@@ -1610,7 +1616,7 @@ while we analyze the results without excluding such data.
 
 In addition, among the 1654 bug participants whose betweenness
 centrality has ever been larger than 0, more than 1500 of them are
-periodically appearing participants. We sampled 4 groups of people
+periodically appearing participants. We sampled 4 groups of participants
 since the results from these sampled data are representative to
 substantiate the assumption we have made for periodically appearing
 participants.

@@ -607,6 +607,20 @@ locally central participants then will not be
 % More details about the validation would be explained in Section
 % \ref{validation}.
 
+<<<<<<< HEAD
+=======
+We also seek to validate if this windowed methodology actually
+highlights relevant behaviour.
+To help validate if this method highlights existing relevant behaviour 
+we inspected the Android release
+history\footnote[1]{Android release history:
+  http://developer.android.com/sdk/index.html} and the Android version
+control system.
+More details about the validation would be explained in Section
+\ref{validation}.
+ 
+
+>>>>>>> 788897dc7945851dec3c2974deb2851042e0fbd1
 In summary, we use SNA to study the activities of bug
 participants based on the Android bug reports and comments
 repository. 
@@ -680,17 +694,27 @@ noted on their edges}
 \subsection{Betweenness Centrality}
 
 % XXX Defined by Freeman? Link/Cite!
+<<<<<<< HEAD
 The betweenness centrality of
+=======
+The betweenness centrality~\footnote[2]{Centrality:
+  http://en.wikipedia.org/wiki/Centrality (March 2012)} of
+>>>>>>> 788897dc7945851dec3c2974deb2851042e0fbd1
 a vertex is the number of geodesic paths in a graph that includes this
 vertex;
 the geodesic path is defined as the shortest path which has the
 minimum weight between two nodes. 
+<<<<<<< HEAD
 Defined by Freeman \cite{SOCIO:freeman}, the betweenness can be represented as:
+=======
+Defined by Freeman, the betweenness can be represented as:
+>>>>>>> 788897dc7945851dec3c2974deb2851042e0fbd1
 
 \begin{equation} 
 \sum_{i=1}^{j-1}\sum_{j=1}^{n}\frac{g_{ij}(k)}{g_{ij}}, i\neq j \neq k
 \end{equation}
 
+<<<<<<< HEAD
 where $k$ is a vertex of the graph, $n$ is the total number of
 vertices, $i$ and $j$ are vertices other than $k$, $g_{ij}$ is the
 number of geodesic paths between vertex $i$ and $j$, and $g_{ij}(k)$
@@ -767,6 +791,151 @@ temporally relevant~\cite{Springer:kidane,Procedia:ibaa} thus
 is a very sharp drop on values of a certain participant, the
 overlapping windows would give a more nuanced view of the change and
 what was happening.
+=======
+where $p_k$ is a vertex of the graph, $n$ is the total number of
+vertices, $i$ and $j$ are vertices other than $p_k$, $g_{ij}$ is the
+number of geodesic paths between vertex $i$ and $j$, and $g_{ij}(p_k)$
+is the number of geodesic paths that include $p_k$.
+
+
+It is used as a measurement of a person's importance in a network. 
+A person would be regarded as central if they are on the geodesic path
+between two other persons. 
+As proposed by Freeman, if a person is located
+on the geodesic path between two other persons, they become the key
+person who connects the others. 
+That is, the more a person connects to
+the other people in a network, the more important or central they 
+are~\cite{BOOK:han}.
+
+
+In our work, we normalize the betweenness centrality values with the
+number of node pairs to eliminate the effect of different sizes of the
+networks.
+
+
+Compared with simply counting the total number of comments or total
+bug reports of a participant, betweenness acts better to reflect the
+interactions among people. For example, when a person reports lots of
+bugs but none of them attract any comment, it is very likely that
+their bug reports are not interesting or important. In this case, if
+we merely counted the number of their reports or comments, we would
+possibly increase their importance in the network
+artificially. Therefore, we choose to use betweenness centrality to
+eliminate this unfair counting~\cite{ICSEsocio:la}.
+
+
+\subsection{Overlapping Time Windowing}
+
+When SNA is applied in other
+papers~\cite{MSR:christ,ICSEsocio:meneely} it is typically applied to
+the entire history or one period of the partial history and all the
+bug reports within that period.
+Windowed analysis instead repeats social network analysis across 100s
+of windows (in our case, as many windows as we have days). These
+windows overlap and often the analysis of one window results in the
+same analysis as the previous window due to overlap. We slid our
+windows by 1 day, so our overlap is 29 days, that is each window does
+some redundant analysis but this leads to smoother transitions in
+analysis between windows. Thus 1 comment in a bug report will have an
+effect on the graphs of 30 windows. This is similar to Hindle et
+al.'s\cite{ICSMwindowed:hindle} analysis of topics using windows but
+they did not use an overlap.
+
+Moreover, time windowing analysis could give a more accurate and
+nuanced view of the data \cite{ICSEsocio:meneely}
+\cite{ICSMwindowed:hindle}, as locally central participants would not
+be ``drowned out''. For instance, if a
+bug participant participated in many bug reports and bug comments during one
+month from January 1st to January 30th, 2010, within this window, they
+would be one of the most central participants with a high
+betweenness. However, if they never appeared except for that
+month, globally, they would have low betweenness and would not show up
+as central
+central, though during a shorter period they have played a vital role. 
+
+
+Another point is that, comments on the same bug might not be globally
+temporally relevant~\cite{Springer:kidane,Procedia:ibaa} thus 
+ a global time analysis would not make much sense in this case. This
+ could happen if new changes induce new bugs or change the behaviour
+ of a reported bug.
+
+In this paper, we slide the windows by one day and there
+is an overlap between two adjacent windows. For two adjacent windows
+$A$ and $B$, $B$ starts on the second day of $A$, and they would have
+an overlap of 29 days. Normally, windows could be either
+overlapped or not. We choose to use the overlapping window because the
+overlapping smooths trends and maintains context. If there
+is a very sharp drop on values of a certain participant, the
+overlapping windows would give a more nuanced view of the change and
+what was happening.
+
+
+\subsection{Clustering}
+
+In order to perceive clusters, that is local groups of interactions,
+we clustered the bug participants by their betweenness centrality
+distribution along the time line. 
+%XXX cite K-Means
+%XXX What is K?
+K-means is one of the most popular
+clustering methods. 
+We choose to use K-means with Cosine distance
+since from our own experiments, data clustered by K-means with Cosine
+distance gives a better view than K-means with Euclidean
+distance. 
+In this paper Cosine distance calculates the similarity between each pair
+author in terms of temporal centrality whereas Euclidean distance
+focuses on the magnitude of data, the size and frequency of centrality.
+The
+Cosine distance between two vectors could be defined as,
+
+
+\begin{equation}
+Cosine\_dist(A,B) = 1-\frac{A\cdot B}{\Arrowvert A \Arrowvert \Arrowvert B \Arrowvert}
+\end{equation}
+
+where A and B are two vectors, $\{\cdot\}$ represents the inner dot
+operation and $\Arrowvert \cdot \Arrowvert$ indicates the module of
+the vector. With clustering, authors with similar temporal centrality would be
+grouped together so that bug participants with similar activity
+patterns would also be grouped together.  In this study we used
+K-means, where $K =
+100$, to cluster authors.
+
+
+\section{Methodology}
+\label{methodology}
+\subsection{Data}
+
+With the provided Android bug repository and the Android version
+control system
+from the MSR Challenge~\cite{DATA:msr}, we converted the XML format data to
+a database for efficient analysis using Microsoft SQL Server Business
+Intelligence. Our analysis focused on the bug records of the previous
+two years from January 1st 2010 to December 4th 2011 since participants
+during these two years are more active than the other years and the
+activities are representative, as showed in Figure 2. The data we used
+covers 14,432 out of 20,169 total bug records and 46,806 out of 67,730
+total bug comments. Related to these bug and comment records, there
+are 30,969 people who have either reported a bug or made comments on a
+bug.
+
+
+The bug and comment records are grouped into 30-day windows sliding by
+1 day. 
+%The strategy of taking 30 days as a window and sliding by 1 day
+%would be discussed in detail in Section \ref{methodology}. 
+We extracted 673 daily windows  from the bug reports we selected.
+
+In addition, we made use of the data from Android version control
+system (git)
+to validate the mining results.
+%  The 
+% ``project'' \ and the ``target'' \ schema record all the submitted files from
+% the developers, from which the actual behaviours could be identified.
+>>>>>>> 788897dc7945851dec3c2974deb2851042e0fbd1
 
 
 \begin{figure*}[ht]
@@ -784,6 +953,7 @@ higher betweenness. }
 \end{figure*}
 
 
+<<<<<<< HEAD
 
 \subsection{Clustering}
 Figure 3(1) orders participants by their betweenness values. We can indeed find that there are participants of low overall betweenness but being very active(show up bright) at some time points, and this supports the necessary of windowing, as stated in section \ref{overlappingtimewindowing}. However, we need more information about participants' working patterns and get an idea about their being interacting groups. 
@@ -955,6 +1125,124 @@ that release. Further validation is discussed in Section
 \ref{validation}. 
 
 
+=======
+\subsection{Windowing Bug Reports and Extracting Social Networks Methodology}
+We windowed the data based on the time series and constructed networks
+that indicated the relations among the participants within each specific
+time window. Per each window, we calculated the betweenness centrality of each
+participant and plotted the centrality per author in a visualization. The steps of our methodology are
+explained as following:
+
+
+\textbf{Step 1: Pruning the data.} We pruned the records of the
+reporters and commenters into a pure name format, which are originally
+recorded in semi-anonymous email formats in the XML repository dump. 
+For example, given the original email address which is represented by
+\textquotedblleft mathias....@gmail.com\textquotedblright, we truncate
+the string starting from \textquotedblleft ....\textquotedblright \
+and keep the front part \textquotedblleft mathias\textquotedblright \
+at the beginning as the name of the reporter or commenter. 
+This strategy could lead to name aliasing problem, especially for
+common names or email addresses starting at just a simple letter like
+\textquotedblleft e....@gmail.com\textquotedblright.
+ It is difficult or even impossible to eliminate the influence from
+ this problem. Hence, we focus on the behaviour of normal cases, which
+ means the cases where the names are less common and less ambiguous.
+
+
+\textbf{Step 2: Windowing the records.} We windowed the data into
+periods of 30 days with a 29-day overlap. 
+30 days was chosen as a window size because it is smaller than the
+periods between a major and minor release, it is similar to a month of
+work, but long enough to contain the resolution of multiple bugs.
+We have compared sliding by 1 day with our previous result of sliding by 7
+days, 1 day sliding produces gradual and smoother transitions of
+centrality.
+
+
+\textbf{Step 3: Establishing the network.} We made a SNA sliding
+window tool with Java and the JUNG Graph Framework, that converted bug
+reports and bug comment records within a window to a social network graph.
+
+The nodes of these networks represent participants who have either
+reported some bugs or made comments on bugs. The edges represent
+connections between two nodes. All the edges are weighted.  
+For a bug within a selected time window, whenever a person
+makes a comment on this bug, the edge between the bug commenter and
+the bug reporter would get weight plus one, as well as the edges
+linking to the participants who previously make comments on this
+bug. Bug reports or comments in different windows would have separate
+network graphs depending on the activity of their reporters or
+commenters. An example in Figure 1 indicates how the weighted network
+graph is built.
+
+
+\textbf{Step 4: Calculating the centrality.} We calculated the
+betweenness centrality with JUNG, and normalized the centrality by
+dividing by the number of node pairs excluding the current node
+($(n-1)(n-2)/2$). We then get a list of all the bug participants and
+their betweenness centrality values for the total 673 overlapping
+windows.
+
+
+\textbf{Step 5: Extracting the participants.} We removed the
+participants with betweenness centrality value 0, who might have
+either reported a bug/bugs with no comments, or made the only comment
+of on a bug so that no other participants are related. Afterwards, we get
+1654 participants in total out of the 30969.
+
+
+\textbf{Step 6: Generating the analysis graph.} The activity
+of each bug participant is represented by a 673 dimensional vector with
+each element indicating the betweenness centrality value extracted
+from the graph generated from the window for that
+specific time period (in our case, the specific time period is 30 days
+starting from the date of the window start point). Then we clustered
+all the vectors by using K-means ($K=100$) with Cosine distance to 100
+clusters. The reason for clustering into 100 clusters is that from
+experiments, we get the aesthetically best visualization (our
+subjective opinion based on visible clusters) of all the data with 100
+clusters. Finally, we plotted the results, as shown in Figure 3 to
+visualize the clustered data so that we could easily analyze
+our results.
+
+
+\textbf{Step 7: Validating with the Android release history and change
+  repository.} In addition to the methodology of mining the Android
+bug repository, we made use of the Android version control system
+(git) and
+inspected the release history to validate the purpose behind the
+clusters we observed.
+In order to find out how the community participants
+act in accordance with the project development and why some
+participants are more likely to be clustered into the same group, we
+looked into their commit history to find their areas of expertise.
+
+
+The types of files modified and the corresponding projects are highly
+correlated with the skills of those who commit changes. For
+instance, if a developer always submits kernel related code
+files, they are more likely to be specialized in kernel techniques. We
+extracted the submissions related to the developer from the version
+control system.
+We manually identified the participants areas of expertise by
+observing the ``project'' and the
+``target'' for all of their commits (such as source code or
+documentation).
+To give a specific example, if there were commits from a developer,
+Mr. Guilfoyle, on the file
+media/java/android/media/Ringtone.java under the project
+platform\_frameworks\_base; then, we would suggest that Mr. Guilfoyle 
+likely has some specialized knowledge about the platform's ringtone. 
+Thus this is how we derive participant expertise.
+
+Also, we could further relate their expertise to their centrality
+patterns. The Android release history could, on the other hand, help
+to relate the release highlights to participants central behaviour during
+that release. Further validation is discussed in Section
+\ref{validation}. 
+
+>>>>>>> 788897dc7945851dec3c2974deb2851042e0fbd1
 
 \begin{figure}[!t]
 \centerline{\includegraphics[width=3.54in]{cluster_comp.png}
@@ -966,6 +1254,7 @@ that release. Further validation is discussed in Section
 % describe the figure. 
 % take up two columns
 \label{results}
+<<<<<<< HEAD
 
 We study the results shown in Figure 2. Each horizontal line represents the 673 betweenness
 centrality values for the selected bug participant during year 2010 and
@@ -1086,12 +1375,133 @@ In addition, for the first obvious ``gap'', which covers the time from
 October 2010 to the end of 2010 (around window 300), there were fewer
 releases. The social network during this time period is almost inactive
 and even ``quiet''.
+=======
+
+We study the results shown in Figure 2. The x-axis represents the
+number of time windows and the starting dates are denoted every 100
+windows. The y-axis represents the number of bug participants who have
+ever been central in the bug community so that their betweenness
+centrality values would be greater than 0 for some time period. The
+color represents the value of betweenness centrality, with darker
+colors corresponding to lower betweenness and lighter colors for
+higher betweenness. Each horizontal line represents the 673 betweenness
+centrality values for some bug participant during year 2010 and
+2011. In total, we have 1654 bug participants. We clustered the data
+using K-means with Cosine distance and numbered the participants from
+1 to 1654. By studying these results, we answered the
+following questions:
+
+
+\subsection{Global Trends}
+
+\textbf{RQ1. How does the number of active bug participants change over time? Why?}
+
+To give an overview, we compared the interaction of bug participants
+between January, 2010 and December, 2011, and found that the
+interaction among participants in Android bug community in 2011 was similar
+to the interaction of participants in 2010 but more frequent. One
+``gap'' occurs around window 300,
+which we will explain in the Section \ref{local} later. 
+
+
+In Figure 4 the number of active participants
+during 2011 is slightly larger than that of 2010. Also, we can observe
+a ``gap'' around the window
+300. Figure 5 shows the sum of betweenness values along the two years'
+time line, we can see that the trend is very similar to that of the
+number of active participants in Figure 4. This suggests that with more
+participants participating in bug reporting community, the interaction among
+them increases accordingly.
+
+
+A possible reason for the changes of the number of active bug participants
+and the betweenness centrality values is that around major or minor
+releases of SDKs, API fixes or improvements, participants seem to become more
+active in bug reporting, discussing and fixing
+activities. Also, during these time periods, bugs are more likely to
+be discovered and reported. 
+Perhaps the pressure of the release is 
+causing developers to address outstanding bugs more than usual.
+% AH: You can't just say this stuff, if you don't know you gotta admit it
+% would probably work longer and harder than usual with more
+%effort and passion, which promotes the discovery of more bugs and
+%problems of the project. 
+%And when the release date is approaching,
+%they have to work hard to fix these bugs. 
+After a
+release, users also take part in the activity of
+discovering the bugs and problems so that in this case both users and
+developers would like to discuss the bugs. 
+%The bug community becomes
+%lively. 
+
+
+\textbf{RQ2. How does the betweenness centrality of a participant change over time? What are the reasons if they have a certain activity pattern?}
+
+Observing the continuity of betweenness centrality in Figure 3, some
+participants have kept active during the entire two years, and
+correspondingly they have a very continuous and bright line. For
+participants of this type, there are a few possible explanations. 
+
+% XXX IN THE PRESENTATION YOU NAMED NAMES. STOP GUESSING. TELL US IF
+% THIS IS THE CASE
+First, we suspect these participants are professional developers who
+belong to the core development team so that what they reported are
+more important issues which attract more participants to discuss and fix
+them. 
+% XXX VERIFY THIS SENTENCE IS IT TRUE OR NOT?
+When investigating some of the continuous lines we found some
+participants were Google employees.
+
+% XXX YOU SAID THIS IN THE PRESENTATION AND HAD EXAMPLES DID YOU LOOK
+% AT THIS OR NOT
+Second, some of these participants are of high community status or
+expertise, and they might
+supervise and guide the development of the 
+project. 
+%They would like to report big issues and will give expert
+%comments on bugs. 
+% XXX PLEASE GIVE AN EXAMPLE WHERE DID THE VALIDATION GO
+
+
+However, in most cases, participants' betweenness values are
+highly variant, as observed in Figure 3. 
+To investigate the variation in betweenness values over time we
+decided to count the number of times that a user experienced one or more
+consecutive windows of betweenness, that is a range of windows in
+which the user had non-zero betweenness.
+% We counted the
+% number of occurrences of the continuous betweenness values which are
+% greater than 0. 
+% It means that we would count 1 if the betweenness
+% value is greater than 0 for the first time and take the next values
+% together as the first continuous occurrence until we meet 0. 
+% Then the
+% second time we meet value greater than 0, we would count 2 and take
+% the next values together as the second continuous occurrence until
+% another 0 occurs. 
+Participants who had less than a few windows of betweeness only had 1
+distinct range of betweenness are considered to be participants who
+only appeared once, and are probably users (validated in Section \ref{validation}). 
+Participants with a count of distinct ranges
+ greater than 1 would be phasers who periodically participate within
+ the Android bug
+community. 
+These randomly phasing participants (\emph{phasers}) are very likely to
+acquire less knowledge or have lower community status in their
+community, than those with continuous high centrality. 
+Phasers
+might be interested in limited topics and only central and active
+during the appearance of bugs relevant to those topics.
+We validate the roles these participants play in Section \ref{validation}.
+>>>>>>> 788897dc7945851dec3c2974deb2851042e0fbd1
 
 
 The other low value showing up in the end of Figure 5 results from
 the fact that there are no bug reports recorded (right tail censoring) in the given dataset.
 This piece of data is still meaningful because it contains comments belonging to bug reports several weeks or months before. The betweenness value is thus simply calculated by the comments here. 
 
+<<<<<<< HEAD
 
 \textbf{RQ4. What are the possible scenarios for a very sharp change of the participants' centrality? Why?}
 
@@ -1099,8 +1509,31 @@ Considering individual participants, almost all of them has
 experienced centrality oscillations. In addition, some participants
 tend to become active and core members during the same time
 period and then they fade away together.
+=======
+By manually inspecting Android version history, we found that the v2.1
+SDK was released on 12 January 2010, which corresponds to the first peak
+value in Figure 5. Android v2.2 SDK was released on 20 May 2010 and this
+corresponds to peak 2. From Dec. 2010 to the beginning of Mar. 2011,
+several minor updates were released and on 22 Feb. 2011, one major
+update v3.0 SDK was released. These releases explain the summit, i.e.,
+peak 3, in  Figure 5. This is correlated with more participation at
+the same time.
+
+In addition, for the first obvious ``gap'', which covers the time from
+October 2010 to the end of 2010 (around window 300), there were fewer
+releases. The social network during this time period is almost inactive
+and even ``quiet''.
 
 
+The other bottom value showing up in the end of Figure 5 results from
+the fact that there are no bug reports recorded (right tail censoring) in the given dataset
+and the betweenness value is simply calculated by the comments
+belonging to bug reports several weeks or months before. 
+
+>>>>>>> 788897dc7945851dec3c2974deb2851042e0fbd1
+
+
+<<<<<<< HEAD
 We suspect that the phasers tend to be interested in one or several
 categories of problems so that they appear only along with the
 occurrence of these issues. They take part in activities related to
@@ -1112,6 +1545,23 @@ activity patterns in Figure 2, we suspect that the phasers that show
 up densely together could be interested in similar categories of
 topics. 
 This assumption is validated in Section
+=======
+Considering individual participants, almost all of them has
+experienced centrality oscillations. In addition, some participants
+tend to become active and core members during the same time
+period and then they fade away together. We call them phasers, who
+phase into centrality and later out of it.
+
+
+We suspect that the phasers tend to be interested in one or several
+categories of problems so that they occur only along with the
+occurrence of these issues. They take part in activities related to
+the bugs or technical issues and become inactive after the problems
+solved. Also, by observing the clustered participants of their
+activity patterns in Figure 3, we suspect that the phasers that show
+up densely together could be interested in similar categories of
+topics. This assumption is validated in Section
+>>>>>>> 788897dc7945851dec3c2974deb2851042e0fbd1
 \ref{validation}. 
 
 
@@ -1130,6 +1580,7 @@ This assumption is validated in Section
 %XXX again you don't answer a research question by making stuff up
 % relate this to your validation or remove it.
 % If it can't be validated don't bother saying it as an answer to a question.
+<<<<<<< HEAD
 %Meanwhile, other possible explanations for the very sharp change in
 %the participants' centrality could be: 1) the participants are pure
 %users; they showed up merely to report bugs they found. These bugs
@@ -1149,6 +1600,27 @@ This assumption is validated in Section
 %very limited information we could get from the repositories and the
 %release history. Participants should be contacted in person for such
 %validation, which has not been done in our study.
+=======
+Meanwhile, other possible explanations for the very sharp change in
+the participants' centrality could be: 1) the participants are pure
+users; they showed up merely to report bugs they found. These bugs
+attract other users or developers to take part in the discussion,
+which would increase the betweenness centrality of the bug reporters,
+i.e., the users, for a very short time period. 2) The participants are
+developers and are on a temporary leave, a vacation for
+example. 
+3) The project is just
+finished or discarded so that both users and developers would not
+discuss anything about it any more. This group of participants could be
+verified by looking for those who do not own any submission and then
+regarded as pure users. 
+The third explanation would be easily
+substantiated by inspecting Android version release history. However,
+the second explanation is hard or even impossible to validate with the
+very limited information we could get from the repositories and the
+release history. Participants should be contacted in person for such
+validation, which has not been done in our study.
+>>>>>>> 788897dc7945851dec3c2974deb2851042e0fbd1
 %XXX GRRR Answer the question! Stop making stuff up. Link it to evidence.
 
 
@@ -1170,6 +1642,7 @@ For RQ1, it could only get answered based on assumption but not validated. RQ3 i
 Among the 1654 participants with betweenness values larger than 0, we
 analyzed their centrality patterns and divide them into three
 categories: 
+<<<<<<< HEAD
 
 1) participants appeared only once with a betweeness greater than 0 (71 out of 1654
 participants),
@@ -1190,11 +1663,37 @@ three activity patterns, we confirmed many of our previous suspicions:
 We look into the git to find the files
 submitted by the 71 participants who have appeared only once in the
 bug community. We found that only 7 of them have ever submitted a
+=======
+
+1) participants appeared only once with a betweeness greater than 0 (71 out of 1654
+participants),
+2) participants recurred periodically (1575 participants)
+and 3) participants who are central along during the entire project
+history (8 participants).
+
+
+From the mining results, we notice that there is a small group of
+participants who have been central for most of our analysis period; another
+relatively larger group appear without any recurrence; the majority
+would periodically become central in their community. Based on the
+three activity patterns, we confirmed many of our previous suspicions:
+
+%XXX MENTION WHICH RQ IS RELEVANT
+\subsubsection{Participants appeared only once tend to be pure users}
+
+We look into the Android version control system to find the files
+submitted by the 71 participants who have appeared only once in the
+bug community. We find that only 7 of them have ever submitted a
+>>>>>>> 788897dc7945851dec3c2974deb2851042e0fbd1
 change, which means that these 7 probably are likely developers rather
 than pure Android users. The rest do not have commits in the version
 control system. This verifies our assumption that participants
 appeared only once in the bug community would more likely be pure
+<<<<<<< HEAD
 users, as introduced in RQ2.
+=======
+users.
+>>>>>>> 788897dc7945851dec3c2974deb2851042e0fbd1
 
 %XXX MENTION WHICH RQ IS RELEVANT
 \subsubsection{Participants showed up periodically should be a combination of users and developers}
@@ -1221,16 +1720,28 @@ Periodically appearing participants are the majority and we call them
 % 1584. For each of the four groups, the number of developers are 5, 13,
 % 9, 7 respectively. They take up 17\%, 32\%, 20\%, and 18\% of the
 % total number of participants in each group. 
+<<<<<<< HEAD
 As the approach described in section \ref{methodology}, looking into the git to manually recognize a participant's expertise takes efforts; with as many as 1575 participants, we sampled 156 participants. $21.8\%$ of the sampled participants were developer phasers, who have ever submitted changes.
+=======
+We sampled 156 participants and of them $21.8\%$ were developer phasers.
+>>>>>>> 788897dc7945851dec3c2974deb2851042e0fbd1
 
 We studied the expertise of the developer participants from this
 sample. All except two of them have worked on single focus tasks that
 implied some kind of expertise or specialization.
 
+<<<<<<< HEAD
 The rest $78.2\%$ have never
 submitted files to the development community. They are probably users
 of Android. Thus, phasers consist of both users and
 developers. This answers to our assumption of the phasers' role in RQ2.
+=======
+The rest of the periodically appearing participants have never
+submitted files to the development community. They are probably users
+of Android. Thus, phasers consist of both users and
+developers. Developers of this group are tended to focus on specific
+topics.
+>>>>>>> 788897dc7945851dec3c2974deb2851042e0fbd1
 
 
 
@@ -1238,7 +1749,11 @@ developers. This answers to our assumption of the phasers' role in RQ2.
 %% increase table row spacing, adjust to taste
 % if using array.sty, it might be a good idea to tweak the value of
 % \extrarowheight as needed to properly center the text within the cells
+<<<<<<< HEAD
 \caption{5 continuously central participants who have submitted changes to the git. On the forth row, ralf and Ralf.Hildebrandt are email alias of the same person, as we observed that the author\_name attributes are the same for the two email alias.}
+=======
+\caption{5 continuously central participants who have submissions in the version control system. On the forth row, ralf and Ralf.Hildebrandt are email alias of the same person, as we observed that the author\_name attributes are the same for the two email alias.}
+>>>>>>> 788897dc7945851dec3c2974deb2851042e0fbd1
 \label{continuous_project}
 \centering
 %% Some packages, such as MDW tools, offer better commands for making tables
@@ -1266,15 +1781,23 @@ MagicSmoke, MusicVisualization), prebuilt, sdk, system\_core) \\
 
 %XXX MENTION WHICH RQ IS RELEVANT
 
+<<<<<<< HEAD
 \subsubsection{Participants who were continuously central for a long time period could have multiple areas of expertise}
 
 5 out of the 8 participants in this group have submissions in the
 git.
+=======
+\subsubsection{Participants who were continuously central could have multiple areas of expertise}
+
+5 out of the 8 participants in this group have submissions in the
+version control system.
+>>>>>>> 788897dc7945851dec3c2974deb2851042e0fbd1
 % XXX What did you mean here VVV this makes no sense whatosever
 % and they take up to 62.5\%, which is significantly
 % larger than the previous two groups.
 We extracted the projects these 5 participants have submitted changes
 to, as listed in Table \ref{continuous_project}.
+<<<<<<< HEAD
 
 
 Firstly, considering the number of changes they made, all of them
@@ -1311,6 +1834,44 @@ that three different centrality patterns correspond to
 participants of three categories, which supports our analysis hypothesis
 in Section \ref{results}.
 
+=======
+
+
+Firstly, considering the number of changes they made, all of them
+except \texttt{mblign} have more than 500 commits within the
+version control system,
+which means that they are quite active in Android
+development community. This could to some extent prove that they are
+experts or advanced developers since more submissions indicates a
+ broader range knowledge about the related techniques.
+% If you don't know, don't say it
+%, especially
+%in such volunteered open source development community.
+
+
+Moreover, \texttt{fadden}, \texttt{xav}, and \texttt{romainguy} are
+all working on the platform layer,
+which includes build, dalvik, development, framework base, libcore,
+sdk, etc. All of their areas of expertise are related to the platform layer or
+system core layer.
+% and should be important along the entire
+%development. 
+%In this case, continuously central participants should
+%have experiences on the system core related topics. 
+%This is an
+%interesting point beyond our hypothesis.
+
+The participant \texttt{romainguy} has experiences modifying almost every
+component relevant to platforms, including both the apps and the core, and
+hence should be considered as Android platform development leader.
+
+
+To summarize, this subsection and the past 2 subsection demonstrate
+that three different centrality patterns correspond to
+participants of three categories, which proves our analysis hypothesis
+in Section \ref{results}.
+
+>>>>>>> 788897dc7945851dec3c2974deb2851042e0fbd1
 
 \begin{table}[!t]
 \centering
@@ -1368,7 +1929,11 @@ ID & Name & Areas Of Expertise \\
 %% increase table row spacing, adjust to taste
 % if using array.sty, it might be a good idea to tweak the value of
 % \extrarowheight as needed to properly center the text within the cells
+<<<<<<< HEAD
 \caption{Participants' common areas of expertise of each cluster. Participants number is counted as the number of participants within each cluster who has ever submitted a change and appeared in the git, ie., developers.}
+=======
+\caption{Participants' common areas of expertise of each cluster. Participants number is counted as the number of participants within each cluster who has ever submitted a change and appeared in the change repository, ie., developers.}
+>>>>>>> 788897dc7945851dec3c2974deb2851042e0fbd1
 \label{cluster_topic}
 \centering
 %% Some packages, such as MDW tools, offer better commands for making tables
@@ -1394,7 +1959,11 @@ Cluster & Participants Number & Areas Of Expertise \\
 %% increase table row spacing, adjust to taste
 % if using array.sty, it might be a good idea to tweak the value of
 % \extrarowheight as needed to properly center the text within the cells
+<<<<<<< HEAD
 \caption{Highlights of identified clusters from Figure 2}
+=======
+\caption{Highlights of identified clusters from Figure 3}
+>>>>>>> 788897dc7945851dec3c2974deb2851042e0fbd1
 \label{release}
 \centering
 %% Some packages, such as MDW tools, offer better commands for making tables
@@ -1425,12 +1994,17 @@ v3.0 & Feb. 22, 2011 & UI design for tables, redesigned keyboard, improved text 
 \subsection{Cluster validation}
 
 As we have discussed above, participants are more active around
+<<<<<<< HEAD
 important releases. Moreover, we can observe from Figure 2 that
+=======
+important releases. Moreover, we can observe from Figure 3 that
+>>>>>>> 788897dc7945851dec3c2974deb2851042e0fbd1
 participants' centrality distributions tend to form into groups or
 clusters, that often
 are found around the releases.
 Participants belonging to the same group become central during
 the same time periods and then fade away together.
+<<<<<<< HEAD
 
 We labeled 21 visible clusters from Figure 2 and looked into five of them. 
 The five clusters we chose are listed in Table \ref{cluster_list}.
@@ -1466,6 +2040,45 @@ areas of expertise of participant clusters (from Figure 2)
  in Table \ref{cluster_topic}.
 
 
+=======
+
+We denoted 21 visible clusters from Figure 3 and looked into five of them. 
+The five clusters we chose are listed in Table \ref{cluster_list}
+
+We extract changes submitted by the members of each cluster from the
+Android version control system. (For those who do not have records in
+the version control system, we regard them as pure users and do not
+consider them in this case). After inspecting their submissions, we
+would get an idea about what kind of tasks they have been mostly
+working on.  
+Based on release history and the commit logs we 
+that these clusters tend to be coherent efforts by multiple kinds of participants.
+%XXX I have no idea what RQ you are talking about. PLEASE SPECIFY
+% WHICH HYPOTHESIS
+This confirms our hypothesis
+from Section \ref{results}.
+
+
+%We have found the following facts that prove our hypothesis:
+
+%XXX MENTION WHICH RQ IS RELEVANT
+
+\subsubsection{Participants clustered together share similar areas of expertise and tasks}
+
+Our analysis in Section \ref{results} shows that the phasers that show
+up densely together could be interested in similar categories of
+topics or working on tasks related to the same area.
+
+
+As described in Section \ref{methodology}, we extract the targets and
+project names from the version control system for each member appeared
+within the cluster. The areas of expertise could be inferred by the contents
+of the targets and the topics of the projects. We summarized the
+areas of expertise of participant clusters (from Figure 3)
+ in Table \ref{cluster_topic}.
+
+
+>>>>>>> 788897dc7945851dec3c2974deb2851042e0fbd1
 % An example of a floating table. Note that, for IEEE style tables, the 
 % \caption command should come BEFORE the table. Table text will default to
 % \footnotesize as IEEE normally uses this smaller font for tables.
@@ -1493,8 +2106,14 @@ Take cluster No.4 as an example. There are 7 developers
 contained in this cluster, as listed in Table \ref{cluster_no4}.
 It can be observed that work of participants in this cluster
 could be generally divided into two groups: one is about the Linux 2.6
+<<<<<<< HEAD
 based kernel, another is on stuffs related to media. Charles, rik.bobbaers, rikard.p.olsson, and riku.voipio (the pruned bug reporter alias \textquotedblleft rik\textquotedblright \ is related to three developers in the git and we look them all; this issue would be discussed in Section \ref{limitation}) are all modifying the Linux 2.6
 kernel. Charles, jasta00, and kristoff are working on
+=======
+based kernel, another is on stuffs related to media. Charles Chin, Rik
+Bobbaers, Rikard Olsson, and Riku Voipio are all modifying the Linux 2.6
+kernel. Charles Chin, Josh Guilfoyle, and Kristoffer are working on
+>>>>>>> 788897dc7945851dec3c2974deb2851042e0fbd1
 the media, which includes sound, video drivers, and
 ringtone. 
 % XXX DONT MAKE STUFF UP
@@ -1508,10 +2127,17 @@ ringtone.
 % l
 
 % XXX did you look at other clusters?
+<<<<<<< HEAD
 When we look into other clusters, we can get similar conclusions.
 Thus, from the observation and analysis above, we can conclude that
 participants with similar centrality patterns often share similar
 areas of expertise and tasks. This validates our assumption about the phasers being clustered on specific techniques in RQ4.
+=======
+If we look into other clusters, we can often make similar conclusions.
+Thus, from the observation and analysis above, we can conclude that
+participants with similar centrality patterns often share similar
+areas of expertise and tasks.
+>>>>>>> 788897dc7945851dec3c2974deb2851042e0fbd1
 
 %XXX MENTION WHICH RQ IS RELEVANT
 \subsubsection{Clusters' working areas of expertise are in accordance with the release contents along the time line}
@@ -1554,8 +2180,11 @@ No.1 and its corresponding release v2.2 as well.
 Our conclusion is that participants' work is relevant to areas of expertise
 associated with clusters, as well the clusters and participation tends
 to be correlated with releases.
+<<<<<<< HEAD
 
 This further validate our answer to RQ4 that developers tend to work as groups on specific projects or issues they are specialized, and their centrality patterns are related to the occurrences of projects or issues.
+=======
+>>>>>>> 788897dc7945851dec3c2974deb2851042e0fbd1
 
 % An example of a floating figure using the graphicx package.
 % Note that \label must occur AFTER (or within) \caption.
@@ -1642,6 +2271,7 @@ while we analyze the results without excluding such data.
 % substantiate the assumption we have made for periodically appearing
 % participants.
 
+<<<<<<< HEAD
 We analyze the results based on the assumption that the types and projects of
 submitted files reflect the techniques the developers are specialized
 in. Hence, we tagged the participants with the techniques according to
@@ -1649,6 +2279,19 @@ their submitted files in the Android git. However,
 there could exists inconsistency to some extend between the techniques
 and the submitted files.
 
+=======
+We analyze the results based on the assumption that the types of
+submitted files reflect the techniques the developers are specialized
+in. Hence, we tagged the participants with the techniques according to
+their submitted files in the Android version control system. However,
+there could exists inconsistency to some extend between the techniques
+and the submitted files.
+
+Our choice of the number of clusters to use in K-means was based on
+our interpretation and sense aesthetics of the resulting plots, thus
+the exact parameters of this plot might not be reproducible by others.
+
+>>>>>>> 788897dc7945851dec3c2974deb2851042e0fbd1
 Our manual inspection increased the validity of the results, but it
 still relied on the authors judgment, interpretation and potential bias.
 
@@ -1661,15 +2304,26 @@ data of 2010 and 2011. We combined overlapping time windows with
 social network analysis in order to analyze the participants
 interactions within the Android bug repository and Android open-source community.
 
+<<<<<<< HEAD
 Android was the case study for our windowed SNA analysis, and we
+=======
+Android was the case study for windowed our SNA analysis, and we
+>>>>>>> 788897dc7945851dec3c2974deb2851042e0fbd1
 analyzed multiple questions regarding the effectiveness of this
 technique on Android.  We analyzed the temporal evolution of Android
 bug reporting community both globally and locally.  Moreover, we
 validated these results by manually inspecting Android version control
+<<<<<<< HEAD
 system history (git). We found and explained sharp changes and the
 appearance of centrality clusters.  For Android we found that most
 minor or major releases lead to high betweenness centrality in
 general. With the data from Android git, we further
+=======
+system history. We found we explain sharp changes and and the
+appearance of centrality clusters.  For Android we found that most
+minor or major releases lead to high betweenness centrality in
+general. With the data from Android version control system, we further
+>>>>>>> 788897dc7945851dec3c2974deb2851042e0fbd1
 validated the three activity patterns of bug participants and found
 reasons for their behaviour and their expertise.  Participants who
 appeared in the same cluster in our plots tended to 

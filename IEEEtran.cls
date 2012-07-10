@@ -1,13 +1,3 @@
-
-%% This is the version of IEEEtran.cls from the IEEE-CS-CPS web site
-%% (http://www.computer.org/portal/web/cscps/submission#prep).
-%% This file contains undocumented derivations from the original file,
-%% and is *not* "IEEEtran.cls 2007/03/05 version V1.7a" by Michael Shell for IEEE.
-%% This file should be eliminated and not used anymore as soon as IEEEtran.cls v1.8 is released.
-%%
-%% This style is provided exclusively for the ICSE 2012 main conference,
-%% ICSE 2012 co-located events, and ICSE 2012 workshops.
-
 %%
 %% IEEEtran.cls 2007/03/05 version V1.7a
 %% 
@@ -154,9 +144,6 @@
 % compsoc
 %    Use the format of the IEEE Computer Society.
 %
-% compsocconf
-% 	Use the	format of IEEE Computer Society conferencs (CPS)
-%
 % romanappendices
 %    Use the "Appendix I" convention when numbering appendices. IEEEtran.cls
 %    now defaults to Alpha "Appendix A" convention - the opposite of what
@@ -248,8 +235,6 @@
 \newif\ifCLASSOPTIONcaptionsoff     \CLASSOPTIONcaptionsofffalse
 
 \newif\ifCLASSOPTIONcompsoc         \CLASSOPTIONcompsocfalse
-
-\newif\ifCLASSOPTIONcompsocconf     \CLASSOPTIONcompsocconffalse
 
 \newif\ifCLASSOPTIONromanappendices \CLASSOPTIONromanappendicesfalse
 
@@ -345,8 +330,6 @@
 
 \DeclareOption{compsoc}{\CLASSOPTIONcompsoctrue}
 
-\DeclareOption{compsocconf}{\CLASSOPTIONcompsocconftrue}
-
 \DeclareOption{romanappendices}{\CLASSOPTIONromanappendicestrue}
 
 
@@ -362,7 +345,7 @@
 % inverse
 \long\def\@IEEEnotcompsoconly#1{\relax\ifCLASSOPTIONcompsoc\else\relax#1\relax\fi\relax}
 % compsoc conference
-\long\def\@IEEEcompsocconfonly#1{\relax\ifCLASSOPTIONcompsocconf\ifCLASSOPTIONconference\relax#1\relax\fi\fi\relax}
+\long\def\@IEEEcompsocconfonly#1{\relax\ifCLASSOPTIONcompsoc\ifCLASSOPTIONconference\relax#1\relax\fi\fi\relax}
 % compsoc not conference
 \long\def\@IEEEcompsocnotconfonly#1{\relax\ifCLASSOPTIONcompsoc\ifCLASSOPTIONconference\else\relax#1\relax\fi\fi\relax}
 
@@ -811,8 +794,8 @@
 
 % the default side margins are equal
 \if@IEEEusingAfourpaper 
-\oddsidemargin        19.05mm
-\evensidemargin       19.05mm
+\oddsidemargin        14.32mm
+\evensidemargin       14.32mm
 \else
 \oddsidemargin        0.680in
 \evensidemargin       0.680in
@@ -839,39 +822,30 @@
 
 
 % compsoc conference
-\ifCLASSOPTIONcompsocconf
+\ifCLASSOPTIONcompsoc
 \ifCLASSOPTIONconference
  % compsoc conference use a larger value for columnsep
- \columnsep 0.25in
+ \columnsep 0.375in
  % compsoc conferences want 1in top margin, 1.125in bottom margin
  \topmargin        0in
- %\addtolength{\topmargin}{-6pt}% we tweak this a tad to better comply with top of line stuff
+ \addtolength{\topmargin}{-6pt}% we tweak this a tad to better comply with top of line stuff
  % we retain the reserved, but unused space for headers
  \addtolength{\topmargin}{-\headheight}
  \addtolength{\topmargin}{-\headsep}
- \textheight        9.0in % (641.39625pt)
-
+ \textheight        8.875in % (641.39625pt)
  % Tweak textheight to a perfect integer number of lines/page.
  \ifx\CLASSOPTIONpt\@IEEEptsizenine\textheight=58\@IEEEnormalsizeunitybaselineskip\fi      % 58 lines/page
- \ifx\CLASSOPTIONpt\@IEEEptsizeten\textheight=54\@IEEEnormalsizeunitybaselineskip\fi       % 54 lines/page
+ \ifx\CLASSOPTIONpt\@IEEEptsizeten\textheight=53\@IEEEnormalsizeunitybaselineskip\fi       % 53 lines/page
  \ifx\CLASSOPTIONpt\@IEEEptsizeeleven\textheight=48\@IEEEnormalsizeunitybaselineskip\fi    % 48 lines/page
  \ifx\CLASSOPTIONpt\@IEEEptsizetwelve\textheight=46\@IEEEnormalsizeunitybaselineskip\fi    % 46 lines/page 
- \textwidth 7in
-
- 
- %adjust text h/w for A4 paper
- \if@IEEEusingAfourpaper 
-  \textheight 9.69in
-  \textwidth 6.77in 
- \fi
- 
+ \textwidth 6.5in
  % the default side margins are equal
  \if@IEEEusingAfourpaper 
-  \oddsidemargin        19.05mm
-  \evensidemargin       19.05mm
+  \oddsidemargin        22.45mm
+  \evensidemargin       22.45mm
  \else
-  \oddsidemargin        0.75in
-  \evensidemargin       0.75in
+  \oddsidemargin        1in
+  \evensidemargin       1in
  \fi
  % compensate for LaTeX's 1in offset
  \addtolength{\oddsidemargin}{-1in}
@@ -1665,7 +1639,7 @@
 \def\appendixname{Appendix}
 \def\abstractname{Abstract}
 % IEEE specific names
-\def\IEEEkeywordsname{Keywords}
+\def\IEEEkeywordsname{Index Terms}
 \def\IEEEproofname{Proof}
 
 
@@ -3033,7 +3007,7 @@ between column types.}%
       \ifCLASSOPTIONpeerreview
       \else
          \footskip 0pt%
-         \ifCLASSOPTIONcompsocconf
+         \ifCLASSOPTIONcompsoc
            \def\@oddfoot{\hss\normalfont\scriptsize\raisebox{-1.5\@IEEEnormalsizeunitybaselineskip}[0ex][0ex]{\@IEEEpubid}\hss}%
            \def\@evenfoot{\hss\normalfont\scriptsize\raisebox{-1.5\@IEEEnormalsizeunitybaselineskip}[0ex][0ex]{\@IEEEpubid}\hss}%
          \else
@@ -3235,11 +3209,8 @@ between column types.}%
 % FONT CONTROLS AND SPACINGS FOR CONFERENCE MODE AUTHOR NAME AND AFFILIATION BLOCKS
 % 
 % The default font styles for the author name and affiliation blocks (confmode)
-%\def\@IEEEauthorblockNstyle{\normalfont\@IEEEcompsocnotconfonly{\sffamily}\sublargesize\@IEEEcompsocconfonly{\large}}
-%\def\@IEEEauthorblockAstyle{\normalfont\@IEEEcompsocnotconfonly{\sffamily}\@IEEEcompsocconfonly{\itshape}\normalsize\@IEEEcompsocconfonly{\large}}
-\def\@IEEEauthorblockNstyle{\normalfont\normalsize}
-\def\@IEEEauthorblockAstyle{\normalfont\@IEEEcompsocnotconfonly{\sffamily}\@IEEEcompsocconfonly{\itshape}\normalsize}
-
+\def\@IEEEauthorblockNstyle{\normalfont\@IEEEcompsocnotconfonly{\sffamily}\sublargesize\@IEEEcompsocconfonly{\large}}
+\def\@IEEEauthorblockAstyle{\normalfont\@IEEEcompsocnotconfonly{\sffamily}\@IEEEcompsocconfonly{\itshape}\normalsize\@IEEEcompsocconfonly{\large}}
 % The default if the user does not use an author block
 \def\@IEEEauthordefaulttextstyle{\normalfont\@IEEEcompsocnotconfonly{\sffamily}\sublargesize}
 
@@ -3464,7 +3435,6 @@ between column types.}%
 % V1.7 parbox to format \@IEEEcompsoctitleabstractindextext
 \long\def\@IEEEcompsoctitleabstractindextextbox#1{\parbox{0.915\textwidth}{#1}}
 
-
 % formats the Title, authors names, affiliations and special paper notice
 % THIS IS A CONTROLLED SPACING COMMAND! Do not allow blank lines or unintentional
 % spaces to enter the definition - use % at the end of each line
@@ -3476,8 +3446,8 @@ between column types.}%
    \@IEEEcompsoctitleabstractindextextbox{\@IEEEcompsoctitleabstractindextext}\par
    \hfill\@IEEEcompsocdiamondline\hfill\hbox{}\par}}}\relax
 \else% not a technote
-   \vskip0.2em{\Huge\@IEEEcompsoconly{\sffamily}\@IEEEcompsocconfonly{\normalfont\normalsize\vskip 0\@IEEEnormalsizeunitybaselineskip
-   \bfseries\Large}\@title\par}\vskip 1.0em\par%
+   \vskip0.2em{\Huge\@IEEEcompsoconly{\sffamily}\@IEEEcompsocconfonly{\normalfont\normalsize\vskip 2\@IEEEnormalsizeunitybaselineskip
+   \bfseries\Large}\@title\par}\vskip1.0em\par%
    % V1.6 handle \author differently if in conference mode
    \ifCLASSOPTIONconference%
       {\@IEEEspecialpapernotice\mbox{}\vskip\@IEEEauthorblockconfadjspace%
@@ -3729,7 +3699,7 @@ between column types.}%
 
 % compsoc journals use \footnotesize, compsoc conferences use normalsize
 \@IEEEcompsoconly{\def\@IEEEabskeysecsize{\footnotesize}}
-%\@IEEEcompsocconfonly{\def\@IEEEabskeysecsize{\normalsize}}
+\@IEEEcompsocconfonly{\def\@IEEEabskeysecsize{\normalsize}}
 
 
 
@@ -3744,12 +3714,12 @@ between column types.}%
     \fi\@IEEEgobbleleadPARNLSP}
 % V1.6 IEEE wants only 1 pica from end of abstract to introduction heading when in 
 % conference mode (the heading already has this much above it)
-\def\endabstract{\relax\ifCLASSOPTIONconference\vspace{1.34ex}\else\vspace{1.34ex}\fi\par\if@twocolumn\else\endquotation\fi
+\def\endabstract{\relax\ifCLASSOPTIONconference\vspace{0ex}\else\vspace{1.34ex}\fi\par\if@twocolumn\else\endquotation\fi
     \normalfont\normalsize}
 
 \def\IEEEkeywords{\normalfont
     \if@twocolumn
-      \@IEEEabskeysecsize\bfseries\textit{\IEEEkeywordsname}-\relax
+      \@IEEEabskeysecsize\bfseries\textit{\IEEEkeywordsname}---\relax
     \else
       \begin{center}\@IEEEabskeysecsize\textbf{\IEEEkeywordsname}\end{center}\quotation\@IEEEabskeysecsize
     \fi\@IEEEgobbleleadPARNLSP}
